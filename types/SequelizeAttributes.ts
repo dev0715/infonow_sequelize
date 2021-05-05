@@ -1,1 +1,4 @@
-export type SequelizeAttributes = "with-indexes" | "without-indexes";
+export enum SequelizeAttributes{
+    WithIndexes = 1,
+    WithoutIndexes = 2,
+}
