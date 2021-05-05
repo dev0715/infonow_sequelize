@@ -1,0 +1,1 @@
+export type SequelizeAttributes = "with-indexes" | "without-indexes";
