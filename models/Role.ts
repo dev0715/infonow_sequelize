@@ -6,18 +6,8 @@ import { SequelizeModel } from '../types/SequelizeModel';
 @Table
 export class Role extends SequelizeModel<Role>{
 
-
-    @Index
     @PrimaryKey
-    @AutoIncrement
-    @Column(DataTypes.TINYINT.UNSIGNED)
-    _roleId!: number
-
-    @Index
-    @AllowNull(false)
-    @Unique(true)
-    @Default(DataTypes.UUIDV4)
-    @Column(DataTypes.STRING(36))
+    @Column(DataTypes.ENUM('student', 'teacher', 'admin', 'super-admin'))
     roleId!: string
 
     @AllowNull(false)

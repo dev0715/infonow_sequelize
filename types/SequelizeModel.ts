@@ -1,5 +1,5 @@
 import { Model } from "sequelize-typescript";
-import { FindOptions, Identifier, ModelAttributeColumnOptions, ModelStatic } from "sequelize/types";
+import { FindOptions, FindOrCreateOptions, Identifier, ModelAttributeColumnOptions, ModelStatic } from "sequelize/types";
 import { SequelizeAttributes } from "./SequelizeAttributes";
 
 export class SequelizeModel<T> extends Model<T>{
@@ -94,6 +94,11 @@ export class SequelizeModel<T> extends Model<T>{
     static async findByPkSafe<T>(attributeTypes: SequelizeAttributes = SequelizeAttributes.WithIndexes, identifier?: Identifier, options?: FindOptions): Promise<T> {
         let columns = attributeTypes === SequelizeAttributes.WithIndexes ? this.getAttributes() : this.getNonIndexes();
         return this.findByPk(identifier, { ...options, attributes: columns }) as any;
+    }
+
+    static async findOrCreateSafe<T>(attributeTypes: SequelizeAttributes = SequelizeAttributes.WithIndexes, options?: FindOrCreateOptions<T>): Promise<[T, boolean]> {
+        let columns = attributeTypes === SequelizeAttributes.WithIndexes ? this.getAttributes() : this.getNonIndexes();
+        return this.findOrCreate({ ...options, attributes: columns } as any) as any;
     }
 
     /**

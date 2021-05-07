@@ -1,8 +1,7 @@
 import { DataTypes } from 'sequelize';
-import { AllowNull, AutoIncrement, BelongsTo, Column, Default, ForeignKey, Index, Model, PrimaryKey, Table, Unique } from "sequelize-typescript";
+import { AllowNull, AutoIncrement, BelongsTo, Column, Default, ForeignKey, Index, PrimaryKey, Table, Unique } from "sequelize-typescript";
 import { Role } from './Role';
 import { SequelizeModel } from '../types/SequelizeModel';
-
 
 
 @Table
@@ -22,7 +21,7 @@ export class User extends SequelizeModel<User>{
     userId!: string
 
     @ForeignKey(() => Role)
-    roleId!: number
+    roleId!: string
 
     @AllowNull(false)
     @Column(DataTypes.STRING(100))

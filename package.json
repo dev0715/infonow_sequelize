@@ -12,6 +12,7 @@
   "dependencies": {
     "chalk": "^4.1.1",
     "dotenv": "^8.5.1",
+    "joi": "^17.4.0",
     "mysql2": "^2.2.5",
     "reflect-metadata": "^0.1.13",
     "sequelize": "^6.6.2",
