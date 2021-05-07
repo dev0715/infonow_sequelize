@@ -35,5 +35,5 @@ export class Participant extends SequelizeModel<Participant> {
 	meeting!: Meeting;
 
 	@BelongsTo(() => User)
-	participant!: User;
+	user!: User;
 }
