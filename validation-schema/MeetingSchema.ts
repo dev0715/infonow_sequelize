@@ -1,7 +1,14 @@
 import Joi from "joi";
 import { ValidationError } from "../errors/ValidationError";
+import { JoiType } from "../types/JoiType";
 
-export const NewMeetingSchema = Joi.object({
+export type NewMeetingSchemaType = {
+	guest: string,
+	scheduledAt: string,
+	createdBy: string,
+};
+
+export const NewMeetingSchema = JoiType({
 	guest: Joi.string()
 		.uuid()
 		.required()
@@ -15,9 +22,13 @@ export const NewMeetingSchema = Joi.object({
 		.uuid()
 		.required()
 		.error(new ValidationError("userId is required")),
-});
+})
 
-export const AcceptOrRejectMeetingSchema = Joi.object({
+
+
+
+
+export const AcceptOrRejectMeetingSchema = JoiType({
 	meetingId: Joi.string()
 		.uuid()
 		.required()
@@ -30,6 +41,7 @@ export const AcceptOrRejectMeetingSchema = Joi.object({
 	
 	message: Joi.string().min(0).max(200),
 });
+
 
 export const CancelOrRescheduleMeetingSchema = Joi.object({
 	meetingId: Joi.string()
