@@ -1,6 +1,8 @@
 export class ValidationError extends Error {
     isJoi = true
-    constructor(message: string) {
+    localMessage: [string, ...any];
+    constructor(message: string, ...args: any) {
         super(message)
+        this.localMessage = [message, ...args]
     }
 }

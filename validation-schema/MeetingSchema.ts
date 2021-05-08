@@ -2,12 +2,13 @@ import Joi from "joi";
 import { ValidationError } from "../errors/ValidationError";
 
 export const NewMeetingSchema = Joi.object({
-	guest: Joi.string().uuid().required().error(new ValidationError("participant is required.")),
+	guest: Joi.string().uuid().required().error(new ValidationError("%s is required.", 'participant')),
 	scheduledAt: Joi.date().required().error(new ValidationError("date is required.")),
 });
 
 export const AcceptOrRejectMeetingSchema = Joi.object({
 	meetingId: Joi.string().uuid().required().error(new ValidationError("meetingId is required.")),
+	
 	status: Joi.string()
 		.valid(...["accepted", "rejected"])
 		.required()
