@@ -1,5 +1,6 @@
+import { includes } from "lodash";
 import { Model } from "sequelize-typescript";
-import { FindOptions, FindOrCreateOptions, Identifier, ModelAttributeColumnOptions, ModelStatic } from "sequelize/types";
+import { ModelType, FindOptions, FindOrCreateOptions, Identifier, Includeable, ModelAttributeColumnOptions, ModelStatic } from "sequelize/types";
 import { SequelizeAttributes } from "./SequelizeAttributes";
 
 export class SequelizeModel<T> extends Model<T>{
@@ -7,7 +8,7 @@ export class SequelizeModel<T> extends Model<T>{
     /**
    * Search for multiple instances.
    ** __SequelizeAttributes.WithIndexes__ will return all attributes
-   ** __SequelizeAttributes.WithoutIndexes__ will return all attributes except the primary keys and foreignkeys
+   ** __SequelizeAttributes.WithoutIndexes__ will return all attributes except the primary keys and foreign keys
    *
    * __Simple search using AND and =__
    * ```js
@@ -69,8 +70,8 @@ export class SequelizeModel<T> extends Model<T>{
    * @see {Sequelize#query}
    */
     static async findAllSafe<T>(attributeTypes: SequelizeAttributes = SequelizeAttributes.WithIndexes, options?: FindOptions): Promise<T> {
-        let columns = attributeTypes === SequelizeAttributes.WithIndexes ? this.getAttributes() : this.getNonIndexes();
-        return this.findAll({ ...options, attributes: columns }) as any;
+        let filteredOptions = this.getAttributesDeep(attributeTypes, options)
+        return this.findAll(filteredOptions) as any;
     }
 
 
@@ -80,8 +81,8 @@ export class SequelizeModel<T> extends Model<T>{
    * * __SequelizeAttributes.WithoutIndexes__ will return all attributes except the primary keys and foreignkeys
    */
     static async findOneSafe<T>(attributeTypes: SequelizeAttributes = SequelizeAttributes.WithIndexes, options?: FindOptions): Promise<T> {
-        let columns = attributeTypes === SequelizeAttributes.WithIndexes ? this.getAttributes() : this.getNonIndexes();
-        return this.findOne({ ...options, attributes: columns }) as any;
+        let filteredOptions = this.getAttributesDeep(attributeTypes, options)
+        return this.findOne(filteredOptions) as any;
     }
 
 
@@ -92,13 +93,13 @@ export class SequelizeModel<T> extends Model<T>{
    * * __SequelizeAttributes.WithoutIndexes__ will return all attributes except the primary keys and foreignkeys
    */
     static async findByPkSafe<T>(attributeTypes: SequelizeAttributes = SequelizeAttributes.WithIndexes, identifier?: Identifier, options?: FindOptions): Promise<T> {
-        let columns = attributeTypes === SequelizeAttributes.WithIndexes ? this.getAttributes() : this.getNonIndexes();
-        return this.findByPk(identifier, { ...options, attributes: columns }) as any;
+        let filteredOptions = this.getAttributesDeep(attributeTypes, options)
+        return this.findByPk(identifier, filteredOptions) as any;
     }
 
     static async findOrCreateSafe<T>(attributeTypes: SequelizeAttributes = SequelizeAttributes.WithIndexes, options?: FindOrCreateOptions<T>): Promise<[T, boolean]> {
-        let columns = attributeTypes === SequelizeAttributes.WithIndexes ? this.getAttributes() : this.getNonIndexes();
-        return this.findOrCreate({ ...options, attributes: columns } as any) as any;
+        let filteredOptions = this.getAttributesDeep(attributeTypes, options)
+        return this.findOrCreate(filteredOptions as any) as any;
     }
 
     /**
@@ -159,5 +160,48 @@ export class SequelizeModel<T> extends Model<T>{
         }
 
         return keys;
+    }
+
+    private static getAttributesDeep(attributeTypes = SequelizeAttributes.WithIndexes, options?: FindOptions | FindOrCreateOptions) {
+        let opts: any = options;
+
+        if (opts) opts.attributes = this.filterAttributes(attributeTypes);
+
+        while (opts) {
+
+            if (opts.include) {
+                opts.include = Array.isArray(opts.include)
+                    ? opts.include.map((include: any) => this.addAttributesToInclude(attributeTypes, include))
+                    : this.addAttributesToInclude(attributeTypes, opts.include)
+                console.log("COLUMNS", opts.include);
+            }
+
+            opts = opts.include
+        }
+
+        console.log("COLUMNS", options);
+
+
+        return options;
+    }
+
+    private static filterAttributes(attributeTypes = SequelizeAttributes.WithoutIndexes) {
+        return attributeTypes === SequelizeAttributes.WithIndexes ? this.getAttributes() : this.getNonIndexes();
+    }
+
+    private static addAttributesToInclude(attributeTypes = SequelizeAttributes.WithIndexes, include: Includeable): Includeable {
+        let _include: any = include;
+
+        if (_include && (_include.model || _include.filterAttributes)) {
+            _include = _include.model ? _include.model : _include;
+
+            _include = {
+                model: _include,
+                attributes: _include.filterAttributes(attributeTypes)
+            }
+        }
+        console.log("include", _include);
+
+        return _include;
     }
 }
