@@ -189,24 +189,27 @@ export class SequelizeModel<T> extends Model<T> {
 		attributeTypes = SequelizeAttributes.WithIndexes,
 		options?: FindOptions | FindOrCreateOptions
 	) {
-		let opts: any = options;
-
-		if (opts) opts.attributes = this.filterAttributes(attributeTypes);
-
-		while (opts) {
-			if (opts.include) {
-				opts.include = Array.isArray(opts.include)
-					? opts.include.map((include: any) =>
-							this.addAttributesToInclude(attributeTypes, include)
-					  )
-					: this.addAttributesToInclude(attributeTypes, opts.include);
-				console.log("COLUMNS", opts.include);
+		if (options) {
+			options.attributes = this.filterAttributes(attributeTypes);
+			this.addAttributesToInclude(attributeTypes, options.include);
+			if (options?.include && !Array.isArray(options?.include)) {
+				if (
+					(options.include as any).model ||
+					(options.include as any).filterAttributes
+				) {
+					let model: any = (options.include as any).model
+						? (options.include as any).model
+						: options.include;
+					options.include = {
+						...(options.include as any),
+						model,
+						attributes: model.filterAttributes(attributeTypes),
+					};
+				}
 			}
-
-			opts = opts.include;
 		}
 
-		// console.log("COLUMNS", options);
+		console.log("AFTER", options);
 
 		return options;
 	}
@@ -221,20 +224,27 @@ export class SequelizeModel<T> extends Model<T> {
 
 	private static addAttributesToInclude(
 		attributeTypes = SequelizeAttributes.WithIndexes,
-		include: Includeable
-	): Includeable {
-		let _include: any = include;
-
-		if (_include && (_include.model || _include.filterAttributes)) {
-			_include = _include.model ? _include.model : _include;
-
-			_include = {
-				model: _include,
-				attributes: _include.filterAttributes(attributeTypes),
-			};
+		include: Includeable | any
+	): void {
+		if (Array.isArray(include)) {
+			for (let j = 0; j < include.length; j++) {
+				if (include[j].model || include[j].filterAttributes) {
+					let model = include[j].model
+						? include[j].model
+						: include[j];
+					include[j] = {
+						...(include[j] as any),
+						model,
+						attributes: model.filterAttributes(attributeTypes),
+					};
+					if (include[j].include) {
+						model.addAttributesToInclude(
+							attributeTypes,
+							include[j].include
+						);
+					}
+				}
+			}
 		}
-		// console.log("include", _include);
-
-		return _include;
 	}
 }
