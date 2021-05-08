@@ -7,6 +7,7 @@ import {
 	Column,
 	Default,
 	ForeignKey,
+	HasMany,
 	Index,
 	PrimaryKey,
 	Table,
@@ -14,6 +15,7 @@ import {
 } from "sequelize-typescript";
 import { MeetingStatus, MeetingStatusEnum } from "../types";
 import { SequelizeModel } from "../types/SequelizeModel";
+import { Participant } from "./Participant";
 import { User } from "./User";
 
 @Table
@@ -56,4 +58,7 @@ export class Meeting extends SequelizeModel<Meeting> {
 
 	@BelongsTo(() => User)
 	user!: User;
+
+	@HasMany(() => Participant)
+	participants!: Participant[];
 }
