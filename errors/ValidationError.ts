@@ -1,6 +1,8 @@
 export class ValidationError extends Error {
-    isJoi = true
-    constructor(message: string) {
-        super(message)
-    }
+	isJoi = true;
+	localeMessage: [string, ...any];
+	constructor(message: string, ...args: any) {
+		super(message);
+		this.localeMessage = [message, ...args];
+	}
 }
