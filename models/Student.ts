@@ -1,5 +1,6 @@
 import { DataTypes } from 'sequelize';
 import { AllowNull, AutoIncrement, BelongsTo, Column, Default, ForeignKey, Index, Model, PrimaryKey, Table, Unique } from 'sequelize-typescript';
+import { StudentStatus, StudentStatusEnum } from '../types';
 import { SequelizeModel } from '../types/SequelizeModel';
 import { Teacher } from './Teacher';
 import { User } from './User';
@@ -16,6 +17,9 @@ export class Student extends SequelizeModel<Student>{
     @ForeignKey(() => Teacher)
     @Column(DataTypes.INTEGER.UNSIGNED)
     teacherId!: number
+
+    @Column(DataTypes.ENUM(...StudentStatusEnum))
+    status!: StudentStatus
 
     @AllowNull(false)
     @Default(DataTypes.NOW)

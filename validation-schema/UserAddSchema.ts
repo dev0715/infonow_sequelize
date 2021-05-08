@@ -1,7 +1,7 @@
 import Joi from 'joi';
 import { ValidationError } from '../errors/ValidationError';
 
-export const UserSchema = Joi.object({
+export const UserAddSchema = Joi.object({
 
     role: Joi.string()
         .valid(...[

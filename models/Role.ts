@@ -1,5 +1,6 @@
 import { DataTypes } from 'sequelize';
-import { AllowNull, AutoIncrement, Column, Default, Index, Model, PrimaryKey, Table, Unique } from "sequelize-typescript";
+import { AllowNull, Column, Default, PrimaryKey, Table } from "sequelize-typescript";
+import { RoleType, RoleTypeEnum } from '../types';
 import { SequelizeModel } from '../types/SequelizeModel';
 
 
@@ -7,8 +8,8 @@ import { SequelizeModel } from '../types/SequelizeModel';
 export class Role extends SequelizeModel<Role>{
 
     @PrimaryKey
-    @Column(DataTypes.ENUM('student', 'teacher', 'admin', 'super-admin'))
-    roleId!: string
+    @Column(DataTypes.ENUM(...RoleTypeEnum))
+    roleId!: RoleType
 
     @AllowNull(false)
     @Column(DataTypes.STRING(70))
