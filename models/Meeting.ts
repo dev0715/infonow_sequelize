@@ -39,10 +39,12 @@ export class Meeting extends SequelizeModel<Meeting> {
 	createdBy!: number;
 
 	@AllowNull(false)
+	@Default("pending")
 	@Column(DataTypes.ENUM(...MeetingStatusEnum))
 	status!: MeetingStatus;
 
 	@AllowNull(false)
+	@Default(DataTypes.NOW)
 	@Column(DataTypes.DATE)
 	scheduledAt!: Date;
 
