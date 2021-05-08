@@ -1,5 +1,5 @@
 import { DataTypes } from 'sequelize';
-import { AllowNull, AutoIncrement, BelongsTo, Column, Default, ForeignKey, Index, Model, PrimaryKey, Table, Unique } from 'sequelize-typescript';
+import { AllowNull, AutoIncrement, BelongsTo, Column, Default, ForeignKey, HasOne, Index, Model, PrimaryKey, Table, Unique } from 'sequelize-typescript';
 import { StudentStatus, StudentStatusEnum } from '../types';
 import { SequelizeModel } from '../types/SequelizeModel';
 import { Teacher } from './Teacher';
@@ -16,7 +16,7 @@ export class Student extends SequelizeModel<Student>{
     @AllowNull(true)
     @ForeignKey(() => Teacher)
     @Column(DataTypes.INTEGER.UNSIGNED)
-    teacherId!: number
+    teacherId?: number
 
     @Column(DataTypes.ENUM(...StudentStatusEnum))
     status!: StudentStatus
@@ -34,7 +34,10 @@ export class Student extends SequelizeModel<Student>{
     @BelongsTo(() => User)
     user!: User
 
-    @BelongsTo(() => Teacher)
-    teacher!: Teacher
+    // @BelongsTo(() => Teacher)
+    // teacher?: Teacher
+
+    @HasOne(() => Teacher)
+    teacher?: Teacher
 
 }

@@ -12,3 +12,6 @@ export type StudentStatus = typeof StudentStatusEnum[number];
 
 export const RoleTypeEnum = <const>['student', 'teacher', 'admin', 'super-admin'];
 export type RoleType = typeof RoleTypeEnum[number];
+export const RoleTypeRegex = new RegExp(`^${RoleTypeEnum.join('|')}$`)
+
+export type UserSearchType = "email" | "_userId" | "userId"

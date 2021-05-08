@@ -1,6 +1,6 @@
-import { includes } from "lodash";
+
 import { Model } from "sequelize-typescript";
-import { ModelType, FindOptions, FindOrCreateOptions, Identifier, Includeable, ModelAttributeColumnOptions, ModelStatic } from "sequelize/types";
+import { CreateOptions, FindOptions, FindOrCreateOptions, Identifier, Includeable, ModelAttributeColumnOptions } from "sequelize/types";
 import { SequelizeAttributes } from "./SequelizeAttributes";
 
 export class SequelizeModel<T> extends Model<T>{
@@ -72,6 +72,12 @@ export class SequelizeModel<T> extends Model<T>{
     static async findAllSafe<T>(attributeTypes: SequelizeAttributes = SequelizeAttributes.WithIndexes, options?: FindOptions): Promise<T> {
         let filteredOptions = this.getAttributesDeep(attributeTypes, options)
         return this.findAll(filteredOptions) as any;
+    }
+
+
+    static async createSafe<T>(values: T, attributeTypes: SequelizeAttributes = SequelizeAttributes.WithIndexes, options?: CreateOptions): Promise<T> {
+        let filteredOptions = this.getAttributesDeep(attributeTypes, options) as any
+        return this.create(values, filteredOptions) as any
     }
 
 
@@ -162,7 +168,7 @@ export class SequelizeModel<T> extends Model<T>{
         return keys;
     }
 
-    private static getAttributesDeep(attributeTypes = SequelizeAttributes.WithIndexes, options?: FindOptions | FindOrCreateOptions) {
+    private static getAttributesDeep(attributeTypes = SequelizeAttributes.WithIndexes, options?: FindOptions | FindOrCreateOptions | CreateOptions) {
         let opts: any = options;
 
         if (opts) opts.attributes = this.filterAttributes(attributeTypes);
@@ -173,15 +179,10 @@ export class SequelizeModel<T> extends Model<T>{
                 opts.include = Array.isArray(opts.include)
                     ? opts.include.map((include: any) => this.addAttributesToInclude(attributeTypes, include))
                     : this.addAttributesToInclude(attributeTypes, opts.include)
-                console.log("COLUMNS", opts.include);
             }
 
             opts = opts.include
         }
-
-        console.log("COLUMNS", options);
-
-
         return options;
     }
 
@@ -200,8 +201,6 @@ export class SequelizeModel<T> extends Model<T>{
                 attributes: _include.filterAttributes(attributeTypes)
             }
         }
-        console.log("include", _include);
-
         return _include;
     }
 }
