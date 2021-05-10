@@ -209,7 +209,7 @@ export class SequelizeModel<T> extends Model<T> {
 			}
 		}
 
-		console.log("AFTER", options);
+		// console.log("AFTER", options);
 
 		return options;
 	}
