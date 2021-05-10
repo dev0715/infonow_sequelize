@@ -1,7 +1,9 @@
 import { DataTypes } from 'sequelize';
-import { AllowNull, AutoIncrement, BelongsTo, Column, Default, ForeignKey, Index, PrimaryKey, Table, Unique } from "sequelize-typescript";
+import { AllowNull, AutoIncrement, BelongsTo, Column, Default, ForeignKey, HasOne, Index, PrimaryKey, Table, Unique } from "sequelize-typescript";
 import { Role } from './Role';
 import { SequelizeModel } from '../types/SequelizeModel';
+import { Student } from './Student';
+import { Teacher } from './Teacher';
 
 
 @Table
@@ -34,7 +36,7 @@ export class User extends SequelizeModel<User>{
 
     @AllowNull(false)
     @Column(DataTypes.STRING(255))
-    password!: string
+    password?: string
 
     @AllowNull(false)
     @Default(DataTypes.NOW)
@@ -48,4 +50,10 @@ export class User extends SequelizeModel<User>{
 
     @BelongsTo(() => Role)
     role!: Role
+
+    @HasOne(() => Student)
+    student?: Student
+
+    @HasOne(() => Teacher)
+    teacher?: Teacher
 }

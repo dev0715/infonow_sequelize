@@ -12,26 +12,24 @@ export class TeacherStudent extends SequelizeModel<TeacherStudent>{
     @Column(DataTypes.INTEGER.UNSIGNED)
     teacherId!: number
 
-    @BelongsTo(() => Teacher)
-    teacher!: Teacher
-
     @PrimaryKey
     @ForeignKey(() => Student)
     @Column(DataTypes.INTEGER.UNSIGNED)
     studentId!: number
-
-    @BelongsTo(() => Student)
-    student!: Student
 
     @AllowNull(false)
     @Default(DataTypes.NOW)
     @Column(DataTypes.DATE)
     createdAt!: Date
 
-
     @AllowNull(true)
     @Default(DataTypes.NOW)
     @Column(DataTypes.DATE)
     updatedAt!: Date
 
+    @BelongsTo(() => Teacher)
+    teacher!: Teacher
+
+    @BelongsTo(() => Student)
+    student!: Student
 }
