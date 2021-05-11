@@ -6,6 +6,7 @@ export type NewMeetingSchemaType = {
 	guest: string;
 	scheduledAt: string;
 	createdBy: string;
+	message: string;
 };
 
 export type updateMeetingSchemaType = {
@@ -29,6 +30,12 @@ export const NewMeetingSchema = JoiType({
 		.uuid()
 		.required()
 		.error(new ValidationError("%s is required", "userId")),
+
+	message: Joi.string()
+		.min(0)
+		.max(200)
+		.required()
+		.error(new ValidationError("%s is required", "message")),
 });
 
 export const AcceptOrRejectMeetingSchema = JoiType({
