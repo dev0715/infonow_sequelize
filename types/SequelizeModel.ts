@@ -11,6 +11,12 @@ import {
 import { SequelizeAttributes } from "./SequelizeAttributes";
 
 export class SequelizeModel<T> extends Model<T> {
+	private static readonly secretColumns = [
+		"password",
+		"accessToken",
+		"verificationCode",
+	];
+
 	/**
 	 * Search for multiple instances.
 	 ** __SequelizeAttributes.WithIndexes__ will return all attributes
@@ -171,11 +177,16 @@ export class SequelizeModel<T> extends Model<T> {
 				if (indexes === undefined) keys.push(key);
 
 				// Add only Indexes or Non Indexes
-				if (indexes === true && this.isIndex(this.rawAttributes[key])) {
+				if (
+					indexes === true &&
+					this.isIndex(this.rawAttributes[key]) &&
+					this.secretColumns.indexOf(key) === -1
+				) {
 					keys.push(key);
 				} else if (
 					indexes === false &&
-					!this.isIndex(this.rawAttributes[key])
+					!this.isIndex(this.rawAttributes[key]) &&
+					this.secretColumns.indexOf(key) === -1
 				) {
 					keys.push(key);
 				}
