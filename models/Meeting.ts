@@ -54,6 +54,10 @@ export class Meeting extends SequelizeModel<Meeting> {
 	message?: string;
 
 	@AllowNull(false)
+	@Column(DataTypes.STRING)
+	agenda?: string;
+
+	@AllowNull(false)
 	@Default(DataTypes.NOW)
 	@Column(DataTypes.DATE)
 	createdAt!: Date;
