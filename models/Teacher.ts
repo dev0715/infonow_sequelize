@@ -8,25 +8,24 @@ import { User } from './User';
 
 
 @Table
-export class Teacher extends SequelizeModel<Teacher>{
-
+export class Teacher extends SequelizeModel<Teacher> {
     @PrimaryKey
     @ForeignKey(() => User)
     @Column(DataTypes.INTEGER.UNSIGNED)
-    teacherId!: number
+    teacherId!: number;
 
     @Column(DataTypes.ENUM(...TeacherStatusEnum))
-    status!: TeacherStatus
+    status!: TeacherStatus;
 
     @AllowNull(false)
     @Default(DataTypes.NOW)
     @Column(DataTypes.DATE)
-    createdAt!: Date
+    createdAt!: Date;
 
     @AllowNull(true)
     @Default(DataTypes.NOW)
     @Column(DataTypes.DATE)
-    updatedAt!: Date
+    updatedAt!: Date;
 
     @BelongsTo(() => User)
     user!: User

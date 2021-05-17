@@ -6,6 +6,8 @@ export type NewMeetingSchemaType = {
 	guest: string;
 	scheduledAt: string;
 	createdBy: string;
+	message: string;
+	agenda: string;
 };
 
 export type updateMeetingSchemaType = {
@@ -23,12 +25,24 @@ export const NewMeetingSchema = JoiType({
 
 	scheduledAt: Joi.date()
 		.required()
-		.error(new ValidationError("%s is required", "date")),
+		.error(new ValidationError("%s is required", "scheduledAt")),
 
 	createdBy: Joi.string()
 		.uuid()
 		.required()
 		.error(new ValidationError("%s is required", "userId")),
+
+	agenda: Joi.string()
+		.min(0)
+		.max(200)
+		.required()
+		.error(new ValidationError("%s is required", "agenda")),
+
+	message: Joi.string()
+		.min(0)
+		.max(200)
+		.required()
+		.error(new ValidationError("%s is required", "message")),
 });
 
 export const AcceptOrRejectMeetingSchema = JoiType({
@@ -45,20 +59,40 @@ export const AcceptOrRejectMeetingSchema = JoiType({
 	message: Joi.string().min(0).max(200),
 });
 
-export const CancelOrRescheduleMeetingSchema = JoiType({
+export const CancelMeetingSchema = JoiType({
 	meetingId: Joi.string()
 		.uuid()
 		.required()
 		.error(new ValidationError("%s is required", "meetingId")),
 
 	status: Joi.string()
-		.valid(...["cancelled", "rescheduled"])
+		.valid(...["cancelled"])
+		.error(new ValidationError("%s is required", "status")),
+
+	scheduledAt: Joi.date().error(
+		new ValidationError("%s is required", "scheduledAt")
+	),
+
+	message: Joi.string()
+		.min(0)
+		.max(200)
 		.required()
+		.error(new ValidationError("%s is required", "message")),
+});
+
+export const RescheduleMeetingSchema = JoiType({
+	meetingId: Joi.string()
+		.uuid()
+		.required()
+		.error(new ValidationError("%s is required", "meetingId")),
+
+	status: Joi.string()
+		.valid(...["rescheduled"])
 		.error(new ValidationError("%s is required", "status")),
 
 	scheduledAt: Joi.date()
 		.required()
-		.error(new ValidationError("%s is required", "date")),
+		.error(new ValidationError("%s is required", "scheduledAt")),
 
 	message: Joi.string()
 		.min(0)
