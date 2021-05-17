@@ -9,8 +9,6 @@ export const sequelize = new Sequelize({
     models: [__dirname + '/models']
 });
 
-
-export * from './models/Admin'
 export * from './models/Document'
 export * from './models/Meeting'
 export * from './models/Participant'

@@ -7,6 +7,7 @@ import {
     Includeable,
     ModelAttributeColumnOptions,
     ModelStatic,
+    UpdateOptions,
 } from "sequelize/types";
 import { SequelizeAttributes } from "./SequelizeAttributes";
 
@@ -119,6 +120,7 @@ export class SequelizeModel<T> extends Model<T> {
         return this.findOrCreate(filteredOptions as any) as any;
     }
 
+
     /**
      * Returns all columns of model except primary and foreign key indexes
      *
@@ -208,8 +210,6 @@ export class SequelizeModel<T> extends Model<T> {
                 }
             }
         }
-
-        console.log("AFTER", options);
 
         return options;
     }

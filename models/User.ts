@@ -1,9 +1,9 @@
 import { DataTypes } from 'sequelize';
-import { AllowNull, AutoIncrement, BelongsTo, Column, Default, ForeignKey, HasOne, Index, PrimaryKey, Table, Unique } from "sequelize-typescript";
-import { Role } from './Role';
+import { AllowNull, AutoIncrement, BelongsTo, Column, Default, ForeignKey, HasMany, HasOne, Index, PrimaryKey, Table, Unique } from "sequelize-typescript";
 import { SequelizeModel } from '../types/SequelizeModel';
-import { Student } from './Student';
-import { Teacher } from './Teacher';
+import { Role } from './Role';
+import { Student } from './Student'
+import { Teacher } from './Teacher'
 
 
 @Table
@@ -56,4 +56,5 @@ export class User extends SequelizeModel<User>{
 
     @HasOne(() => Teacher)
     teacher?: Teacher
+
 }
