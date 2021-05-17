@@ -22,6 +22,14 @@ export class UnknownError extends ApplicationError {
 }
 
 export class UserFacingError extends ApplicationError {
+
+	localeMessage: [string, ...any];
+
+	constructor(message: string, ...args: any) {
+		super(message);
+		this.localeMessage = [message, ...args];
+	}
+
 	get statusCode() {
 		return 400
 	}
