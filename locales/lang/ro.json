@@ -1,0 +1,6 @@
+{
+    "participant is required.": "participant is required.",
+    "Malformed/Missing Authorization Token. ER_401 (INCORRECT_JWT)": "Malformed/Missing Authorization Token. ER_401 (INCORRECT_JWT)",
+    "Bad Request, please check the request format and try again. ER_400 (INCORRECT_JSON)": "Bad Request, please check the request format and try again. ER_400 (INCORRECT_JSON)",
+    "Something is not right, please try again later. ER_500": "Something is not right, please try again later. ER_500"
+}

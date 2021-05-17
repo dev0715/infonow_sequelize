@@ -30,5 +30,13 @@ export const RequiredConfigurations: Configuration[] = [
 	{
 		"name": "DATABASE_NAME",
 		"type": "string"
-	}
+	},
+	{
+		"name": "AUTHORIZATION_PRIVATE_KEY",
+		"type": "encryption_key"
+	},
+	{
+		"name": "AUTHORIZATION_TOKEN_LIFE",
+		"type": "number"
+	},
 ]

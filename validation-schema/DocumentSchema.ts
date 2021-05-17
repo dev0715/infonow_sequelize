@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import { ValidationError } from '../errors/ValidationError';
+import { ValidationError } from '../utils/errors';
 
 export const DocumentSchema = Joi.object({
 

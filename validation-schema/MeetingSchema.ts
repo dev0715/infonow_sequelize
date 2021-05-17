@@ -1,5 +1,5 @@
 import Joi from "joi";
-import { ValidationError } from "../errors/ValidationError";
+import { ValidationError } from "../utils/errors";
 import { JoiType } from "../types/JoiType";
 
 export type NewMeetingSchemaType = {

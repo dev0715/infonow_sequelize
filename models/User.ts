@@ -1,5 +1,6 @@
 import { DataTypes } from 'sequelize';
 import { AllowNull, AutoIncrement, BelongsTo, Column, Default, ForeignKey, HasMany, HasOne, Index, PrimaryKey, Table, Unique } from "sequelize-typescript";
+import { RoleType } from '../types';
 import { SequelizeModel } from '../types/SequelizeModel';
 import { Role } from './Role';
 import { Student } from './Student'
@@ -23,7 +24,7 @@ export class User extends SequelizeModel<User>{
     userId!: string
 
     @ForeignKey(() => Role)
-    roleId!: string
+    roleId!: RoleType
 
     @AllowNull(false)
     @Column(DataTypes.STRING(100))
