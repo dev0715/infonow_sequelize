@@ -14,7 +14,7 @@ export class User extends SequelizeModel<User>{
     @PrimaryKey
     @AutoIncrement
     @Column(DataTypes.INTEGER.UNSIGNED)
-    _userId!: number
+    _userId?: number
 
     @Index
     @AllowNull(false)
@@ -24,7 +24,7 @@ export class User extends SequelizeModel<User>{
     userId!: string
 
     @ForeignKey(() => Role)
-    roleId!: RoleType
+    roleId?: RoleType
 
     @AllowNull(false)
     @Column(DataTypes.STRING(100))
@@ -50,7 +50,7 @@ export class User extends SequelizeModel<User>{
     updatedAt!: Date
 
     @BelongsTo(() => Role)
-    role!: Role
+    role?: Role
 
     @HasOne(() => Student)
     student?: Student

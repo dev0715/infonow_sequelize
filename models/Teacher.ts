@@ -12,7 +12,7 @@ export class Teacher extends SequelizeModel<Teacher> {
     @PrimaryKey
     @ForeignKey(() => User)
     @Column(DataTypes.INTEGER.UNSIGNED)
-    teacherId!: number;
+    teacherId?: number;
 
     @Column(DataTypes.ENUM(...TeacherStatusEnum))
     status!: TeacherStatus;

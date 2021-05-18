@@ -9,7 +9,7 @@ export class Role extends SequelizeModel<Role>{
 
     @PrimaryKey
     @Column(DataTypes.ENUM(...RoleTypeEnum))
-    roleId!: RoleType
+    roleId?: RoleType
 
     @AllowNull(false)
     @Column(DataTypes.STRING(70))

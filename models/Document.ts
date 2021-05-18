@@ -22,8 +22,12 @@ export class Document extends SequelizeModel<Document>{
     @ForeignKey(() => User)
     userId!: number
 
-    @BelongsTo(() => User)
-    user!: User
+    @Index
+    @AllowNull(false)
+    @Unique(true)
+    @Column(DataTypes.STRING)
+    documentPublicId!: string
+
 
     @AllowNull(false)
     @Column(DataTypes.STRING(20))
@@ -42,5 +46,9 @@ export class Document extends SequelizeModel<Document>{
     @Default(DataTypes.NOW)
     @Column(DataTypes.DATE)
     updatedAt!: Date
+
+
+    @BelongsTo(() => User)
+    user!: User
 
 }

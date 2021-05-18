@@ -4,7 +4,7 @@ import { NextFunction, Request, Response } from 'express'
 import _ from 'lodash'
 import { BadRequestError, UnAuthorizedError } from '../../utils/errors'
 import { TokenCore } from './token'
-import {User} from '../../models/User'
+import { User } from '../../models/User'
 import { CoreHttpErrorHandler } from '../error'
 
 
@@ -64,7 +64,7 @@ export class AuthorizeUtil {
 			// Authorize user from Token
 			req.CurrentUser = await AuthorizeUtil.AuthorizeCore(req)
 
-			// If User is not a mover, not allow
+			// If User is not a teacher, not allow
 			if (!_.has(req, 'CurrentUser.type'))
 				throw new UnAuthorizedError(`${ERR_MSG} code:${AuthorizeUtil.ERR_CODES1.USER_TYPE_NOT_SPECIFIED}`)
 			if (req.CurrentUser.roleId != 'teacher')
@@ -91,7 +91,7 @@ export class AuthorizeUtil {
 			// Authorize user from Token
 			req.CurrentUser = await AuthorizeUtil.AuthorizeCore(req)
 
-			// If User is not a mover, not allow
+			// If User is not a student, not allow
 			if (!_.has(req, 'CurrentUser.type'))
 				throw new UnAuthorizedError(`${ERR_MSG} code:${AuthorizeUtil.ERR_CODES1.USER_TYPE_NOT_SPECIFIED}`)
 			if (req.CurrentUser.roleId != 'student')
@@ -118,7 +118,7 @@ export class AuthorizeUtil {
 			// Authorize user from Token
 			req.CurrentUser = await AuthorizeUtil.AuthorizeCore(req)
 
-			// If User is not a mover, not allow
+			// If User is not a admin , super-admin, not allow
 			if (!_.has(req, 'CurrentUser.type'))
 				throw new UnAuthorizedError(`${ERR_MSG} code:${AuthorizeUtil.ERR_CODES1.USER_TYPE_NOT_SPECIFIED}`)
 
@@ -157,7 +157,7 @@ export class AuthorizeUtil {
 		}
 	}
 
-    /**
+	/**
 	 * @description Authorizes a Super Admin based on JWT or EJWT
 	 * @param req Request
 	 * @param res Response

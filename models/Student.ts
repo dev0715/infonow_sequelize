@@ -12,7 +12,7 @@ export class Student extends SequelizeModel<Student>{
     @PrimaryKey
     @ForeignKey(() => User)
     @Column(DataTypes.INTEGER.UNSIGNED)
-    studentId!: number
+    studentId?: number
 
     @AllowNull(true)
     @ForeignKey(() => Teacher)
