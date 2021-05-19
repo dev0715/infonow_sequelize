@@ -10,3 +10,4 @@ String.prototype.capitalize = function () {
 String.prototype.parseJson = function () {
 	return JSON.parse(this.toString())
 }
+

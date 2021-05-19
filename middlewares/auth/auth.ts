@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 'use strict'
 import { Validators as _vals } from './../../utils'
 import { NextFunction, Request, Response } from 'express'
@@ -8,16 +7,6 @@ import { TokenCore } from './token'
 import { User } from '../../models/User'
 import { CoreHttpErrorHandler } from '../error'
 
-=======
-"use strict";
-import { Validators as _vals } from "./../../utils";
-import { NextFunction, Request, Response } from "express";
-import _ from "lodash";
-import { BadRequestError, UnAuthorizedError } from "../../utils/errors";
-import { TokenCore } from "./token";
-import { User } from "../../models/User";
-import { CoreHttpErrorHandler } from "../error";
->>>>>>> 3eef555cd25d1da6456e9fed41d37debbb7254af
 
 export class AuthorizeUtil {
 	private static ERR_CODES1 = {
@@ -93,23 +82,11 @@ export class AuthorizeUtil {
 			// Authorize user from Token
 			req.CurrentUser = await AuthorizeUtil.AuthorizeCore(req);
 
-<<<<<<< HEAD
 			// If User is not a teacher, not allow
-			if (!_.has(req, 'CurrentUser.type'))
+			if (!_.has(req, 'CurrentUser.roleId'))
 				throw new UnAuthorizedError(`${ERR_MSG} code:${AuthorizeUtil.ERR_CODES1.USER_TYPE_NOT_SPECIFIED}`)
 			if (req.CurrentUser.roleId != 'teacher')
 				throw new UnAuthorizedError(`${ERR_MSG} code:${AuthorizeUtil.ERR_CODES1.USER_TYPE_NOT_TEACHER}`)
-=======
-			// If User is not a mover, not allow
-			if (!_.has(req, "CurrentUser.type"))
-				throw new UnAuthorizedError(
-					`${ERR_MSG} code:${AuthorizeUtil.ERR_CODES1.USER_TYPE_NOT_SPECIFIED}`
-				);
-			if (req.CurrentUser.roleId != "teacher")
-				throw new UnAuthorizedError(
-					`${ERR_MSG} code:${AuthorizeUtil.ERR_CODES1.USER_TYPE_NOT_TEACHER}`
-				);
->>>>>>> 3eef555cd25d1da6456e9fed41d37debbb7254af
 
 			// - Proceed to the next route only on successful authorization
 			if (next) next();
@@ -136,23 +113,11 @@ export class AuthorizeUtil {
 			// Authorize user from Token
 			req.CurrentUser = await AuthorizeUtil.AuthorizeCore(req);
 
-<<<<<<< HEAD
 			// If User is not a student, not allow
-			if (!_.has(req, 'CurrentUser.type'))
+			if (!_.has(req, 'CurrentUser.roleId'))
 				throw new UnAuthorizedError(`${ERR_MSG} code:${AuthorizeUtil.ERR_CODES1.USER_TYPE_NOT_SPECIFIED}`)
 			if (req.CurrentUser.roleId != 'student')
 				throw new UnAuthorizedError(`${ERR_MSG} code:${AuthorizeUtil.ERR_CODES1.USER_TYPE_NOT_STUDENT}`)
-=======
-			// If User is not a mover, not allow
-			if (!_.has(req, "CurrentUser.type"))
-				throw new UnAuthorizedError(
-					`${ERR_MSG} code:${AuthorizeUtil.ERR_CODES1.USER_TYPE_NOT_SPECIFIED}`
-				);
-			if (req.CurrentUser.roleId != "student")
-				throw new UnAuthorizedError(
-					`${ERR_MSG} code:${AuthorizeUtil.ERR_CODES1.USER_TYPE_NOT_STUDENT}`
-				);
->>>>>>> 3eef555cd25d1da6456e9fed41d37debbb7254af
 
 			// - Proceed to the next route only on successful authorization
 			if (next) next();
@@ -179,17 +144,9 @@ export class AuthorizeUtil {
 			// Authorize user from Token
 			req.CurrentUser = await AuthorizeUtil.AuthorizeCore(req);
 
-<<<<<<< HEAD
 			// If User is not a admin , super-admin, not allow
-			if (!_.has(req, 'CurrentUser.type'))
+			if (!_.has(req, 'CurrentUser.roleId'))
 				throw new UnAuthorizedError(`${ERR_MSG} code:${AuthorizeUtil.ERR_CODES1.USER_TYPE_NOT_SPECIFIED}`)
-=======
-			// If User is not a mover, not allow
-			if (!_.has(req, "CurrentUser.type"))
-				throw new UnAuthorizedError(
-					`${ERR_MSG} code:${AuthorizeUtil.ERR_CODES1.USER_TYPE_NOT_SPECIFIED}`
-				);
->>>>>>> 3eef555cd25d1da6456e9fed41d37debbb7254af
 
 			// - Proceed to the next route only on successful authorization
 			if (next) next();
@@ -217,7 +174,7 @@ export class AuthorizeUtil {
 			req.CurrentUser = await AuthorizeUtil.AuthorizeCore(req);
 
 			// If User is not a mover, not allow
-			if (!_.has(req, "CurrentUser.type"))
+			if (!_.has(req, "CurrentUser.roleId"))
 				throw new UnAuthorizedError(
 					`${ERR_MSG} code:${AuthorizeUtil.ERR_CODES1.USER_TYPE_NOT_SPECIFIED}`
 				);
@@ -252,7 +209,7 @@ export class AuthorizeUtil {
 			req.CurrentUser = await AuthorizeUtil.AuthorizeCore(req);
 
 			// If User is not a mover, not allow
-			if (!_.has(req, "CurrentUser.type"))
+			if (!_.has(req, "CurrentUser.roleId"))
 				throw new UnAuthorizedError(
 					`${ERR_MSG} code:${AuthorizeUtil.ERR_CODES1.USER_TYPE_NOT_SPECIFIED}`
 				);

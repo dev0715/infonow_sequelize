@@ -9,7 +9,7 @@ export class Document extends SequelizeModel<Document>{
     @Index
     @PrimaryKey
     @AutoIncrement
-    @Column(DataTypes.TINYINT.UNSIGNED)
+    @Column(DataTypes.INTEGER.UNSIGNED)
     _documentId!: number
 
     @Index
