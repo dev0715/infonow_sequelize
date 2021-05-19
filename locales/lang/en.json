@@ -19,5 +19,6 @@
     "You are not authorized to access this resource": "You are not authorized to access this resource",
     "No student assign": "No student assign",
     "User with %s Not found": "User with %s Not found",
-    "Either email or password is Invalid!": "Either email or password is Invalid!"
+    "Either email or password is Invalid!": "Either email or password is Invalid!",
+    "You are not authorized to %s this meeting":"You are not authorized to %s this meeting"
 }
