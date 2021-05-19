@@ -12,49 +12,30 @@ import {
 	Table,
 	Unique,
 } from "sequelize-typescript";
-import { MeetingStatus, MeetingStatusEnum } from "../types";
 import { SequelizeModel } from "../types/SequelizeModel";
-import { Participant } from "./Participant";
+import { ChatParticipant } from "./ChatParticipant";
+import { Message } from "./Message";
 import { User } from "./User";
 
 @Table
-export class Meeting extends SequelizeModel<Meeting> {
+export class Chat extends SequelizeModel<Chat> {
 	@Index
 	@PrimaryKey
 	@AutoIncrement
 	@Column(DataTypes.INTEGER.UNSIGNED)
-	_meetingId!: number;
+	_chatId!: number;
 
 	@Index
 	@AllowNull(false)
 	@Unique(true)
 	@Default(DataTypes.UUIDV4)
 	@Column(DataTypes.STRING(36))
-	meetingId!: string;
+	chatId!: string;
 
 	@Index
 	@ForeignKey(() => User)
 	@Column(DataTypes.INTEGER.UNSIGNED)
 	createdBy!: number;
-
-	@AllowNull(false)
-	@Default("pending")
-	@Column(DataTypes.ENUM(...MeetingStatusEnum))
-	status!: MeetingStatus;
-
-	@AllowNull(false)
-	@Default(DataTypes.NOW)
-	@Column(DataTypes.DATE)
-	scheduledAt!: Date;
-
-	@AllowNull(true)
-	@Default("pending")
-	@Column(DataTypes.STRING)
-	message?: string;
-
-	@AllowNull(false)
-	@Column(DataTypes.STRING)
-	agenda?: string;
 
 	@AllowNull(false)
 	@Default(DataTypes.NOW)
@@ -69,6 +50,9 @@ export class Meeting extends SequelizeModel<Meeting> {
 	@BelongsTo(() => User)
 	user!: User;
 
-	@HasMany(() => Participant)
-	participants!: Participant[];
+	@HasMany(() => ChatParticipant)
+	participants!: ChatParticipant[];
+
+	@HasMany(() => Message)
+	messages!: Message[];
 }

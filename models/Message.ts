@@ -6,31 +6,35 @@ import {
 	Column,
 	Default,
 	ForeignKey,
-	HasMany,
 	Index,
 	PrimaryKey,
 	Table,
 	Unique,
 } from "sequelize-typescript";
-import { MeetingStatus, MeetingStatusEnum } from "../types";
+import { MessageStatus, MessageStatusEnum } from "../types";
 import { SequelizeModel } from "../types/SequelizeModel";
-import { Participant } from "./Participant";
+import { Chat } from "./Chat";
 import { User } from "./User";
 
 @Table
-export class Meeting extends SequelizeModel<Meeting> {
+export class Message extends SequelizeModel<Message> {
 	@Index
 	@PrimaryKey
 	@AutoIncrement
 	@Column(DataTypes.INTEGER.UNSIGNED)
-	_meetingId!: number;
+	_messageId!: number;
 
 	@Index
 	@AllowNull(false)
 	@Unique(true)
 	@Default(DataTypes.UUIDV4)
 	@Column(DataTypes.STRING(36))
-	meetingId!: string;
+	messageId!: string;
+
+	@Index
+	@ForeignKey(() => Chat)
+	@Column(DataTypes.INTEGER.UNSIGNED)
+	chatId!: number;
 
 	@Index
 	@ForeignKey(() => User)
@@ -38,28 +42,22 @@ export class Meeting extends SequelizeModel<Meeting> {
 	createdBy!: number;
 
 	@AllowNull(false)
-	@Default("pending")
-	@Column(DataTypes.ENUM(...MeetingStatusEnum))
-	status!: MeetingStatus;
+	@Column(DataTypes.TEXT)
+	content!: string;
 
 	@AllowNull(false)
-	@Default(DataTypes.NOW)
-	@Column(DataTypes.DATE)
-	scheduledAt!: Date;
-
-	@AllowNull(true)
-	@Default("pending")
-	@Column(DataTypes.STRING)
-	message?: string;
-
-	@AllowNull(false)
-	@Column(DataTypes.STRING)
-	agenda?: string;
+	@Default("sent")
+	@Column(DataTypes.ENUM(...MessageStatusEnum))
+	status!: MessageStatus;
 
 	@AllowNull(false)
 	@Default(DataTypes.NOW)
 	@Column(DataTypes.DATE)
 	createdAt!: Date;
+
+	@AllowNull(true)
+	@Column(DataTypes.DATE)
+	seenAt!: Date;
 
 	@AllowNull(true)
 	@Default(DataTypes.NOW)
@@ -69,6 +67,6 @@ export class Meeting extends SequelizeModel<Meeting> {
 	@BelongsTo(() => User)
 	user!: User;
 
-	@HasMany(() => Participant)
-	participants!: Participant[];
+	@BelongsTo(() => Chat)
+	chat!: Chat;
 }

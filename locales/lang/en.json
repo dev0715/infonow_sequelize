@@ -20,5 +20,8 @@
     "No student assign": "No student assign",
     "User with %s Not found": "User with %s Not found",
     "Either email or password is Invalid!": "Either email or password is Invalid!",
-    "You are not authorized to %s this meeting":"You are not authorized to %s this meeting"
+    "You are not authorized to %s this meeting":"You are not authorized to %s this meeting",
+    "No chat found":"No chat found",
+    "Failed to add chat, try again":"Failed to add chat, try again",
+    "Participant not found":"Participant not found"
 }
