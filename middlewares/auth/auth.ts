@@ -1,12 +1,12 @@
-'use strict'
-import { Validators as _vals } from './../../utils'
-import { NextFunction, Request, Response } from 'express'
-import _ from 'lodash'
-import { BadRequestError, UnAuthorizedError } from '../../utils/errors'
-import { TokenCore } from './token'
-import { User } from '../../models/User'
-import { CoreHttpErrorHandler } from '../error'
-
+"use strict";
+import { Validators as _vals } from "./../../utils";
+import { NextFunction, Request, Response } from "express";
+import _ from "lodash";
+import { BadRequestError, UnAuthorizedError } from "../../utils/errors";
+import { TokenCore } from "./token";
+import { User } from "../../models/User";
+import { CoreHttpErrorHandler } from "../error";
+import { tGeneric } from "../../locales";
 
 export class AuthorizeUtil {
 	private static ERR_CODES1 = {
@@ -83,10 +83,14 @@ export class AuthorizeUtil {
 			req.CurrentUser = await AuthorizeUtil.AuthorizeCore(req);
 
 			// If User is not a teacher, not allow
-			if (!_.has(req, 'CurrentUser.roleId'))
-				throw new UnAuthorizedError(`${ERR_MSG} code:${AuthorizeUtil.ERR_CODES1.USER_TYPE_NOT_SPECIFIED}`)
-			if (req.CurrentUser.roleId != 'teacher')
-				throw new UnAuthorizedError(`${ERR_MSG} code:${AuthorizeUtil.ERR_CODES1.USER_TYPE_NOT_TEACHER}`)
+			if (!_.has(req, "CurrentUser.roleId"))
+				throw new UnAuthorizedError(
+					`${ERR_MSG} code:${AuthorizeUtil.ERR_CODES1.USER_TYPE_NOT_SPECIFIED}`
+				);
+			if (req.CurrentUser.roleId != "teacher")
+				throw new UnAuthorizedError(
+					`${ERR_MSG} code:${AuthorizeUtil.ERR_CODES1.USER_TYPE_NOT_TEACHER}`
+				);
 
 			// - Proceed to the next route only on successful authorization
 			if (next) next();
@@ -114,10 +118,14 @@ export class AuthorizeUtil {
 			req.CurrentUser = await AuthorizeUtil.AuthorizeCore(req);
 
 			// If User is not a student, not allow
-			if (!_.has(req, 'CurrentUser.roleId'))
-				throw new UnAuthorizedError(`${ERR_MSG} code:${AuthorizeUtil.ERR_CODES1.USER_TYPE_NOT_SPECIFIED}`)
-			if (req.CurrentUser.roleId != 'student')
-				throw new UnAuthorizedError(`${ERR_MSG} code:${AuthorizeUtil.ERR_CODES1.USER_TYPE_NOT_STUDENT}`)
+			if (!_.has(req, "CurrentUser.roleId"))
+				throw new UnAuthorizedError(
+					`${ERR_MSG} code:${AuthorizeUtil.ERR_CODES1.USER_TYPE_NOT_SPECIFIED}`
+				);
+			if (req.CurrentUser.roleId != "student")
+				throw new UnAuthorizedError(
+					`${ERR_MSG} code:${AuthorizeUtil.ERR_CODES1.USER_TYPE_NOT_STUDENT}`
+				);
 
 			// - Proceed to the next route only on successful authorization
 			if (next) next();
@@ -145,8 +153,10 @@ export class AuthorizeUtil {
 			req.CurrentUser = await AuthorizeUtil.AuthorizeCore(req);
 
 			// If User is not a admin , super-admin, not allow
-			if (!_.has(req, 'CurrentUser.roleId'))
-				throw new UnAuthorizedError(`${ERR_MSG} code:${AuthorizeUtil.ERR_CODES1.USER_TYPE_NOT_SPECIFIED}`)
+			if (!_.has(req, "CurrentUser.roleId"))
+				throw new UnAuthorizedError(
+					`${ERR_MSG} code:${AuthorizeUtil.ERR_CODES1.USER_TYPE_NOT_SPECIFIED}`
+				);
 
 			// - Proceed to the next route only on successful authorization
 			if (next) next();
@@ -218,6 +228,36 @@ export class AuthorizeUtil {
 					`${ERR_MSG} code:${AuthorizeUtil.ERR_CODES1.USER_TYPE_NOT_SUPER_ADMIN}`
 				);
 
+			// - Proceed to the next route only on successful authorization
+			if (next) next();
+		} catch (err) {
+			//! Throw Error to Error Controller
+			CoreHttpErrorHandler(err, req, res, next);
+		}
+	}
+
+	static AuthorizeAccessIfAdminOrSuperAdminOnly(
+		req: Request,
+		res: Response,
+		next: NextFunction
+	) {
+		try {
+			const ERR_MSG = "Cannot Authorize the user at the moment.";
+			if (!req.CurrentUser) {
+				throw new UnAuthorizedError(tGeneric.NOT_AUTHORIZED);
+			}
+
+			let { userId } = req.params;
+
+			if (userId) {
+				if (
+					userId != req.CurrentUser.userId &&
+					req.CurrentUser.roleId !== "admin" &&
+					req.CurrentUser.roleId !== "super-admin"
+				) {
+					throw new UnAuthorizedError(tGeneric.NOT_AUTHORIZED);
+				}
+			}
 			// - Proceed to the next route only on successful authorization
 			if (next) next();
 		} catch (err) {
