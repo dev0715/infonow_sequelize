@@ -6,48 +6,42 @@ import {
 	Column,
 	Default,
 	ForeignKey,
-	HasOne,
+	HasMany,
 	Index,
 	PrimaryKey,
 	Table,
 	Unique,
 } from "sequelize-typescript";
-import { RoleType } from "../types";
+import { ChatTypes, ChatTypesEnum } from "../types";
 import { SequelizeModel } from "../types/SequelizeModel";
-import { Role } from "./Role";
-import { Student } from "./Student";
-import { Teacher } from "./Teacher";
+import { ChatParticipant } from "./ChatParticipant";
+import { Message } from "./Message";
+import { User } from "./User";
 
 @Table
-export class User extends SequelizeModel<User> {
+export class Chat extends SequelizeModel<Chat> {
 	@Index
 	@PrimaryKey
 	@AutoIncrement
 	@Column(DataTypes.INTEGER.UNSIGNED)
-	_userId?: number;
+	_chatId!: number;
 
 	@Index
 	@AllowNull(false)
 	@Unique(true)
 	@Default(DataTypes.UUIDV4)
 	@Column(DataTypes.STRING(36))
-	userId!: string;
+	chatId!: string;
 
-	@ForeignKey(() => Role)
-	roleId?: RoleType;
-
-	@AllowNull(false)
-	@Column(DataTypes.STRING(100))
-	name!: string;
-
-	@Unique(true)
-	@AllowNull(false)
-	@Column(DataTypes.STRING(255))
-	email!: string;
+	@Index
+	@ForeignKey(() => User)
+	@Column(DataTypes.INTEGER.UNSIGNED)
+	createdBy!: number;
 
 	@AllowNull(false)
-	@Column(DataTypes.STRING(255))
-	password?: string;
+	@Default("chat")
+	@Column(DataTypes.ENUM(...ChatTypesEnum))
+	type!: ChatTypes;
 
 	@AllowNull(false)
 	@Default(DataTypes.NOW)
@@ -59,12 +53,12 @@ export class User extends SequelizeModel<User> {
 	@Column(DataTypes.DATE)
 	updatedAt!: Date;
 
-	@BelongsTo(() => Role)
-	role?: Role;
+	@BelongsTo(() => User)
+	user!: User;
 
-	@HasOne(() => Student)
-	student?: Student;
+	@HasMany(() => ChatParticipant)
+	chatParticipants!: ChatParticipant[];
 
-	@HasOne(() => Teacher)
-	teacher?: Teacher;
+	@HasMany(() => Message)
+	messages!: Message[];
 }

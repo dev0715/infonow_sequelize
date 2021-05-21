@@ -21,8 +21,14 @@
     "User with %s Not found": "User with %s Not found",
     "Either email or password is Invalid!": "Either email or password is Invalid!",
     "You are not authorized to %s this meeting": "You are not authorized to %s this meeting",
+    "No chat found": "No chat found",
+    "Failed to add chat, try again": "Failed to add chat, try again",
+    "Participant not found": "Participant not found",
     "No document found": "No document found",
     "New password and confirm password does not match": "New password and confirm password does not match",
     "password is Invalid!": "password is Invalid!",
-    "Invalid status type": "Invalid status type"
+    "Invalid status type": "Invalid status type",
+    "One participant is required": "One participant is required",
+    "At least one participant is required": "At least one participant is required",
+    "You are not authorized to this operation": "You are not authorized to this operation"
 }

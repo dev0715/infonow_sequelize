@@ -7,26 +7,26 @@ import {
 	PrimaryKey,
 	Table,
 } from "sequelize-typescript";
-import { Meeting } from "./Meeting";
+import { Chat } from "./Chat";
 import { User } from "./User";
 import { SequelizeModel } from "../types/SequelizeModel";
 
 @Table
-export class Participant extends SequelizeModel<Participant> {
+export class ChatParticipant extends SequelizeModel<ChatParticipant> {
 	@Index
-	@ForeignKey(() => Meeting)
+	@ForeignKey(() => Chat)
 	@PrimaryKey
 	@Column(DataTypes.INTEGER.UNSIGNED)
-	meetingId!: number;
+	chatId!: number;
 
 	@Index
 	@ForeignKey(() => User)
 	@PrimaryKey
 	@Column(DataTypes.INTEGER.UNSIGNED)
-	participantId!: number;
+	chatParticipantId!: number;
 
-	@BelongsTo(() => Meeting)
-	meeting!: Meeting;
+	@BelongsTo(() => Chat)
+	chat!: Chat;
 
 	@BelongsTo(() => User)
 	user!: User;
