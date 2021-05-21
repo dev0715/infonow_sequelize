@@ -30,6 +30,9 @@ export class Teacher extends SequelizeModel<Teacher> {
     @BelongsTo(() => User)
     user!: User
 
-    @BelongsToMany(() => Student, () => TeacherStudent)
+    @HasMany(() => Student)
     students?: Student[]
+
+    // @BelongsToMany(() => Student, () => TeacherStudent)
+    // students?: Student[]
 }

@@ -246,6 +246,7 @@ export class SequelizeModel<T> extends Model<T> {
 						model,
 						attributes: model.filterAttributes(attributeTypes),
 					};
+
 					if (include[j].include) {
 						model.addAttributesToInclude(
 							attributeTypes,
