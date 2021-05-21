@@ -1,3 +1,5 @@
+import { t } from "../locales";
+
 export class ApplicationError extends Error {
 	constructor(message: string, data: any = undefined) {
 		super(message);

@@ -12,6 +12,7 @@ import {
 	Table,
 	Unique,
 } from "sequelize-typescript";
+import { ChatTypes, ChatTypesEnum } from "../types";
 import { SequelizeModel } from "../types/SequelizeModel";
 import { ChatParticipant } from "./ChatParticipant";
 import { Message } from "./Message";
@@ -38,6 +39,11 @@ export class Chat extends SequelizeModel<Chat> {
 	createdBy!: number;
 
 	@AllowNull(false)
+	@Default("chat")
+	@Column(DataTypes.ENUM(...ChatTypesEnum))
+	type!: ChatTypes;
+
+	@AllowNull(false)
 	@Default(DataTypes.NOW)
 	@Column(DataTypes.DATE)
 	createdAt!: Date;
@@ -51,7 +57,7 @@ export class Chat extends SequelizeModel<Chat> {
 	user!: User;
 
 	@HasMany(() => ChatParticipant)
-	participants!: ChatParticipant[];
+	chatParticipants!: ChatParticipant[];
 
 	@HasMany(() => Message)
 	messages!: Message[];

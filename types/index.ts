@@ -13,6 +13,9 @@ export type MeetingStatus = typeof MeetingStatusEnum[number];
 export const MessageStatusEnum = <const>["sent", "seen", "deleted"];
 export type MessageStatus = typeof MessageStatusEnum[number];
 
+export const ChatTypesEnum = <const>["chat", "group"];
+export type ChatTypes = typeof ChatTypesEnum[number];
+
 export const TeacherStatusEnum = <const>["new", "approved", "blocked"];
 export type TeacherStatus = typeof TeacherStatusEnum[number];
 
@@ -34,3 +37,4 @@ export type RoleType = typeof RoleTypeEnum[number];
 export const RoleTypeRegex = `${RoleTypeEnum.join("|")}`;
 
 export type UserSearchType = "email" | "_userId" | "userId";
+export type ChatSearchType = "_chatId" | "chatId";

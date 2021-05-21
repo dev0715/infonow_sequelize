@@ -22,14 +22,7 @@ export class Message extends SequelizeModel<Message> {
 	@PrimaryKey
 	@AutoIncrement
 	@Column(DataTypes.INTEGER.UNSIGNED)
-	_messageId!: number;
-
-	@Index
-	@AllowNull(false)
-	@Unique(true)
-	@Default(DataTypes.UUIDV4)
-	@Column(DataTypes.STRING(36))
-	messageId!: string;
+	messageId!: number;
 
 	@Index
 	@ForeignKey(() => Chat)

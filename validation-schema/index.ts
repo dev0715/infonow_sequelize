@@ -4,3 +4,4 @@ export * from "./UserAddSchema";
 export * from "./UserAuthSchema";
 export * from "./ChatSchema";
 export * from "./MessageSchema";
+export * from "./ChatParticipantSchema";
