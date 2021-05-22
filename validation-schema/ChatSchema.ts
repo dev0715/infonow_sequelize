@@ -8,6 +8,7 @@ export type NewChatSchemaType = {
 	participants: string[];
 	createdBy: string;
 	role: RoleType;
+	groupName: string;
 };
 
 export const NewChatSchema = JoiType({
@@ -15,6 +16,13 @@ export const NewChatSchema = JoiType({
 		.pattern(/^chat|group$/)
 		.required()
 		.error(new ValidationError("%s is required", "type")),
+
+	groupName: Joi.string()
+		.error(new ValidationError("%s is required", "groupName"))
+		.when("type", {
+			is: "group",
+			then: Joi.string().min(1).max(100).required(),
+		}),
 
 	participants: Joi.array()
 		.items(Joi.string().uuid().required())

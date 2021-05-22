@@ -6,6 +6,7 @@ import {
 	Column,
 	Default,
 	ForeignKey,
+	HasOne,
 	Index,
 	PrimaryKey,
 	Table,

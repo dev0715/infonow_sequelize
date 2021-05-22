@@ -16,7 +16,8 @@ module.exports = {
         queryInterface.changeColumn('Messages', 'messageId', {
           type: DataTypes.INTEGER.UNSIGNED,
           primaryKey: true,
-          allowNull: false
+          allowNull: false,
+          autoIncrement: true
         }, { transaction: t }).then(() => t.commit()).catch(e => t.rollback())
       }).catch(e => t.rollback())
     })
