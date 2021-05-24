@@ -30,5 +30,7 @@
     "Invalid status type": "Invalid status type",
     "One participant is required": "One participant is required",
     "At least one participant is required": "At least one participant is required",
-    "You are not authorized to this operation": "You are not authorized to this operation"
+    "You are not authorized to this operation": "You are not authorized to this operation",
+    "Invalid Participant":"Invalid Participant",
+    "Duplicate participant not allowed":"Duplicate participant not allowed"
 }

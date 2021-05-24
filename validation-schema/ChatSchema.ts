@@ -14,7 +14,6 @@ export type NewChatSchemaType = {
 export const NewChatSchema = JoiType({
 	type: Joi.string()
 		.pattern(/^chat|group$/)
-		.required()
 		.error(new ValidationError("%s is required", "type")),
 
 	groupName: Joi.string()

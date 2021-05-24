@@ -10,7 +10,12 @@ export const MeetingStatusEnum = <const>[
 ];
 export type MeetingStatus = typeof MeetingStatusEnum[number];
 
-export const MessageStatusEnum = <const>["sent", "seen", "deleted"];
+export const MessageStatusEnum = <const>[
+	"sent",
+	"delivered",
+	"seen",
+	"deleted",
+];
 export type MessageStatus = typeof MessageStatusEnum[number];
 
 export const ChatTypesEnum = <const>["chat", "group"];
