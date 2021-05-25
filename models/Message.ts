@@ -6,17 +6,12 @@ import {
 	Column,
 	Default,
 	ForeignKey,
-	HasOne,
-	HasMany,
 	Index,
 	PrimaryKey,
 	Table,
-	Unique,
 } from "sequelize-typescript";
-import { MessageStatus, MessageStatusEnum } from "../types";
 import { SequelizeModel } from "../types/SequelizeModel";
 import { Chat } from "./Chat";
-import { StatusMessage } from "./StatusMessage";
 import { User } from "./User";
 
 @Table
@@ -56,7 +51,4 @@ export class Message extends SequelizeModel<Message> {
 
 	@BelongsTo(() => Chat)
 	chat!: Chat;
-
-	@HasMany(() => StatusMessage)
-	statusMessage!: StatusMessage[];
 }

@@ -6,6 +6,8 @@ import {
 	Index,
 	PrimaryKey,
 	Table,
+	AllowNull,
+	Default,
 } from "sequelize-typescript";
 import { Chat } from "./Chat";
 import { User } from "./User";
@@ -30,4 +32,12 @@ export class ChatParticipant extends SequelizeModel<ChatParticipant> {
 
 	@BelongsTo(() => User)
 	user!: User;
+
+	@AllowNull(true)
+	@Column(DataTypes.DATE)
+	deliveredAt!: Date;
+
+	@AllowNull(true)
+	@Column(DataTypes.DATE)
+	seenAt!: Date;
 }
