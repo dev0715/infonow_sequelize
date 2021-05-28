@@ -32,5 +32,9 @@
     "At least one participant is required": "At least one participant is required",
     "You are not authorized to this operation": "You are not authorized to this operation",
     "Invalid Participant":"Invalid Participant",
-    "Duplicate participant not allowed":"Duplicate participant not allowed"
+    "Duplicate participant not allowed":"Duplicate participant not allowed",
+    "Add Participants data is not complete":"Add Participants data is not complete",
+    "chat not joined":"chat not joined",
+    "chatId is required on Join Room":"chatId is required on Join Room",
+    "New Message data is not complete":"New Message data is not complete"
 }
