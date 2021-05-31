@@ -1,9 +1,8 @@
 import { DataTypes } from 'sequelize';
-import { AllowNull, AutoIncrement, BelongsTo, BelongsToMany, Column, Default, ForeignKey, HasOne, Index, Model, PrimaryKey, Table, Unique } from 'sequelize-typescript';
+import { AllowNull, BelongsTo, Column, Default, ForeignKey, PrimaryKey, Table } from 'sequelize-typescript';
 import { StudentStatus, StudentStatusEnum } from '../types';
 import { SequelizeModel } from '../types/SequelizeModel';
 import { Teacher } from './Teacher';
-import { TeacherStudent } from './TeacherStudent';
 import { User } from './User';
 
 @Table
@@ -37,7 +36,4 @@ export class Student extends SequelizeModel<Student>{
 
     @BelongsTo(() => Teacher)
     teacher?: Teacher
-
-    // @BelongsToMany(() => Teacher, () => TeacherStudent)
-    // teachers?: Teacher[]
 }
