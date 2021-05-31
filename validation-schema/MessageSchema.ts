@@ -1,6 +1,7 @@
 import Joi from "joi";
 import { ValidationError } from "../utils/errors";
 import { JoiType } from "../types/JoiType";
+import { Moment } from "moment";
 
 export type NewMessageSchemaType = {
 	chatId: number;
@@ -9,8 +10,8 @@ export type NewMessageSchemaType = {
 };
 
 export type UpdateMessageSchemaType = {
-	messageId: string;
-	seenAt: string;
+	messageId: number;
+	seenAt: Moment;
 };
 
 export const NewMessageSchema = JoiType({

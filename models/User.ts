@@ -49,6 +49,10 @@ export class User extends SequelizeModel<User> {
 	@Column(DataTypes.STRING(255))
 	password?: string;
 
+	@AllowNull(true)
+	@Column(DataTypes.STRING(255))
+	profilePicture!: string;
+
 	@AllowNull(false)
 	@Default(DataTypes.NOW)
 	@Column(DataTypes.DATE)

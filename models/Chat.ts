@@ -43,6 +43,10 @@ export class Chat extends SequelizeModel<Chat> {
 	@Column(DataTypes.ENUM(...ChatTypesEnum))
 	type!: ChatTypes;
 
+	@AllowNull(true)
+	@Column(DataTypes.STRING(100))
+	groupName!: string;
+
 	@AllowNull(false)
 	@Default(DataTypes.NOW)
 	@Column(DataTypes.DATE)

@@ -1,7 +1,6 @@
 'use strict';
 const Sequelize = require('sequelize')
 const { QueryInterface, DataTypes } = require('sequelize');
-const { ChatTypesEnum } = require('../types');
 
 module.exports = {
   /**
@@ -15,9 +14,9 @@ module.exports = {
 
     await queryInterface.addColumn(
       'Chats',
-      'type', {
-      type: DataTypes.ENUM(...ChatTypesEnum),
-      defaultValue: "chat"
+      'groupName', {
+      type: DataTypes.STRING(100),
+      allowNull: true
     }
     );
 
@@ -30,7 +29,7 @@ module.exports = {
     */
   down: async (queryInterface, Sequelize) => {
     // Add reverting commands here.
-    await queryInterface.removeColumn('Chats', 'type');
+    await queryInterface.removeColumn('Chats', 'groupName');
 
   }
 };

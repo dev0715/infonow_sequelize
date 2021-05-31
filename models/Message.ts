@@ -9,9 +9,7 @@ import {
 	Index,
 	PrimaryKey,
 	Table,
-	Unique,
 } from "sequelize-typescript";
-import { MessageStatus, MessageStatusEnum } from "../types";
 import { SequelizeModel } from "../types/SequelizeModel";
 import { Chat } from "./Chat";
 import { User } from "./User";
@@ -39,18 +37,9 @@ export class Message extends SequelizeModel<Message> {
 	content!: string;
 
 	@AllowNull(false)
-	@Default("sent")
-	@Column(DataTypes.ENUM(...MessageStatusEnum))
-	status!: MessageStatus;
-
-	@AllowNull(false)
 	@Default(DataTypes.NOW)
 	@Column(DataTypes.DATE)
 	createdAt!: Date;
-
-	@AllowNull(true)
-	@Column(DataTypes.DATE)
-	seenAt!: Date;
 
 	@AllowNull(true)
 	@Default(DataTypes.NOW)
