@@ -1,8 +1,8 @@
 import { DataTypes } from 'sequelize';
 import { SequelizeModel } from '../types/SequelizeModel'
 import { AllowNull, AutoIncrement, BelongsTo, Column, Comment, Default, ForeignKey, HasMany, Index, PrimaryKey, Table, Unique } from 'sequelize-typescript';
-import { Test } from './test';
 import { Option } from './Option';
+import { Test } from './Test';
 
 @Table
 export class Question extends SequelizeModel<Question>{
@@ -39,7 +39,7 @@ export class Question extends SequelizeModel<Question>{
     marks!: number
 
     @Index
-    @AllowNull(false)
+    @AllowNull(true)
     @Column(DataTypes.STRING)
     image!: string
 
@@ -57,6 +57,6 @@ export class Question extends SequelizeModel<Question>{
     Test!: Test
 
     @HasMany(() => Option)
-    Options!: Option[]
+    options!: Option[]
 
 }

@@ -1,35 +1,34 @@
 import { DataTypes } from 'sequelize';
-import { SequelizeModel } from '../types/SequelizeModel'
-import { AllowNull, AutoIncrement, BelongsTo, Column, Default, ForeignKey, Index, Model, PrimaryKey, Table, Unique } from 'sequelize-typescript';
+import { AllowNull, BelongsTo, Column, Default, ForeignKey, PrimaryKey, Table } from 'sequelize-typescript';
+import { SequelizeModel } from '../types/SequelizeModel';
 import { Student } from './Student';
 import { Test } from './Test';
 
 @Table
-export class Attempt extends SequelizeModel<Attempt>{
+export class StudentTest extends SequelizeModel<StudentTest>{
 
-    @Index
     @PrimaryKey
-    @AutoIncrement
-    @Column(DataTypes.INTEGER.UNSIGNED)
-    _attemptId!: number
-
-    @Index
     @AllowNull(false)
-    @Unique(true)
-    @Default(DataTypes.UUIDV4)
-    @Column(DataTypes.STRING(36))
-    attemptId!: string
+    @Column(DataTypes.INTEGER.UNSIGNED)
+    studentTestId!: number
 
     @ForeignKey(() => Student)
+    @AllowNull(false)
+    @Column(DataTypes.INTEGER.UNSIGNED)
     studentId!: number
 
+
     @ForeignKey(() => Test)
+    @AllowNull(false)
+    @Column(DataTypes.INTEGER.UNSIGNED)
     testId!: number
+
 
     @AllowNull(false)
     @Default(DataTypes.NOW)
     @Column(DataTypes.DATE)
     createdAt!: Date
+
 
     @AllowNull(true)
     @Default(DataTypes.NOW)
@@ -37,9 +36,8 @@ export class Attempt extends SequelizeModel<Attempt>{
     updatedAt!: Date
 
     @BelongsTo(() => Student)
-    student!: Student
+    user!: Student
 
     @BelongsTo(() => Test)
     test!: Test
-
 }

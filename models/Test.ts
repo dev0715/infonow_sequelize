@@ -49,6 +49,6 @@ export class Test extends SequelizeModel<Test>{
     @BelongsTo(() => Teacher)
     teacher!: Teacher
 
-    // @HasMany(() => Question)
-    // questions?: Question[]
+    @HasMany(() => Question)
+    questions?: Question[]
 }
