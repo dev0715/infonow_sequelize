@@ -1,13 +1,14 @@
 import { Sequelize } from "sequelize-typescript";
 import GlobalConfigs from "./configs";
 const dbConfig = GlobalConfigs!.DatabaseConfigurations;
+import { Op } from 'sequelize'
 
 export const sequelize = new Sequelize({
 	dialect: "mysql",
 	...dbConfig,
 	models: [__dirname + "/models"],
 });
-
+export const op = Op;
 export * from "./models/Document";
 export * from "./models/Meeting";
 export * from "./models/Participant";

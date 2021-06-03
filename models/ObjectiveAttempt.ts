@@ -17,7 +17,7 @@ export class ObjectiveAttempt extends SequelizeModel<ObjectiveAttempt>{
     @PrimaryKey
     @ForeignKey(() => Question)
     @Column(DataTypes.INTEGER.UNSIGNED)
-    QuestionId!: number
+    questionId!: number
 
     @PrimaryKey
     @ForeignKey(() => Option)

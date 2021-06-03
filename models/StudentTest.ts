@@ -1,5 +1,5 @@
 import { DataTypes } from 'sequelize';
-import { AllowNull, BelongsTo, Column, Default, ForeignKey, PrimaryKey, Table } from 'sequelize-typescript';
+import { AllowNull, AutoIncrement, BelongsTo, Column, Default, ForeignKey, PrimaryKey, Table } from 'sequelize-typescript';
 import { SequelizeModel } from '../types/SequelizeModel';
 import { Student } from './Student';
 import { Test } from './Test';
@@ -9,6 +9,7 @@ export class StudentTest extends SequelizeModel<StudentTest>{
 
     @PrimaryKey
     @AllowNull(false)
+    @AutoIncrement
     @Column(DataTypes.INTEGER.UNSIGNED)
     studentTestId!: number
 

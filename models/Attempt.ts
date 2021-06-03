@@ -1,8 +1,10 @@
 import { DataTypes } from 'sequelize';
 import { SequelizeModel } from '../types/SequelizeModel'
-import { AllowNull, AutoIncrement, BelongsTo, Column, Default, ForeignKey, Index, Model, PrimaryKey, Table, Unique } from 'sequelize-typescript';
+import { AllowNull, AutoIncrement, BelongsTo, Column, Default, ForeignKey, HasMany, Index, Model, PrimaryKey, Table, Unique } from 'sequelize-typescript';
 import { Student } from './Student';
 import { Test } from './Test';
+import { ObjectiveAttempt } from './ObjectiveAttempt';
+import { SubjectiveAttempt } from './SubjectiveAttempt';
 
 @Table
 export class Attempt extends SequelizeModel<Attempt>{
@@ -41,5 +43,11 @@ export class Attempt extends SequelizeModel<Attempt>{
 
     @BelongsTo(() => Test)
     test!: Test
+
+    @HasMany(() => ObjectiveAttempt)
+    objectiveAttempt?: ObjectiveAttempt[]
+
+    @HasMany(() => SubjectiveAttempt)
+    subjectiveAttempt?: SubjectiveAttempt[]
 
 }

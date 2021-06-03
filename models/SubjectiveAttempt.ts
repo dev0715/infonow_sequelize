@@ -16,9 +16,9 @@ export class SubjectiveAttempt extends SequelizeModel<SubjectiveAttempt>{
     @PrimaryKey
     @ForeignKey(() => Question)
     @Column(DataTypes.INTEGER.UNSIGNED)
-    QuestionId!: number
+    questionId!: number
 
-    @AllowNull(false)
+    @AllowNull(true)
     @Column(DataTypes.INTEGER)
     obtainedMarks!: number
 
