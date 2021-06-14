@@ -36,5 +36,6 @@
     "Add Participants data is not complete":"Add Participants data is not complete",
     "chat not joined":"chat not joined",
     "chatId is required on Join Room":"chatId is required on Join Room",
-    "New Message data is not complete":"New Message data is not complete"
+    "New Message data is not complete":"New Message data is not complete",
+    "Failed to add participants, try again": "Failed to add participants, try again"
 }

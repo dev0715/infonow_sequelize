@@ -9,6 +9,7 @@ export type NewChatSchemaType = {
 	createdBy: string;
 	role: RoleType;
 	groupName: string;
+	groupPhoto: string;
 };
 
 export const NewChatSchema = JoiType({
@@ -21,6 +22,13 @@ export const NewChatSchema = JoiType({
 		.when("type", {
 			is: "group",
 			then: Joi.string().min(1).max(100).required(),
+		}),
+
+	groupPhoto: Joi.string()
+		.error(new ValidationError("%s is required", "groupPhoto"))
+		.when("type", {
+			is: "group",
+			then: Joi.string().required(),
 		}),
 
 	participants: Joi.array()

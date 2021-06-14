@@ -47,6 +47,10 @@ export class Chat extends SequelizeModel<Chat> {
 	@Column(DataTypes.STRING(100))
 	groupName!: string;
 
+	@AllowNull(true)
+	@Column(DataTypes.STRING(255))
+	groupPhoto!: string;
+
 	@AllowNull(false)
 	@Default(DataTypes.NOW)
 	@Column(DataTypes.DATE)
