@@ -40,4 +40,8 @@ export class ChatParticipant extends SequelizeModel<ChatParticipant> {
 	@AllowNull(true)
 	@Column(DataTypes.DATE)
 	seenAt!: Date;
+
+	@AllowNull(true)
+	@Column(DataTypes.DATE)
+	lastMessageTime!: Date;
 }
