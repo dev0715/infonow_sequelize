@@ -6,6 +6,7 @@ export * from "./ChatSchema";
 export * from "./MessageSchema";
 export * from "./ChatParticipantSchema";
 export * from "./TestSchema";
+export * from "./UpdateTestSchema";
 export * from "./AttemptStartSchema";
 export * from "./AttemptUpdateSchema";
 export * from "./SubjectiveAttemptSchema";

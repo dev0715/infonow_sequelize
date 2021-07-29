@@ -1,10 +1,12 @@
 import { DataTypes } from 'sequelize';
 import { SequelizeModel } from '../types/SequelizeModel'
-import { AllowNull, AutoIncrement, BelongsTo, Column, Default, ForeignKey, HasMany, Index, Model, PrimaryKey, Table, Unique } from 'sequelize-typescript';
+import { AllowNull, AutoIncrement, BelongsTo, Column, Default, ForeignKey, HasMany, HasOne, Index, Model, PrimaryKey, Table, Unique } from 'sequelize-typescript';
 import { Student } from './Student';
 import { Test } from './Test';
 import { ObjectiveAttempt } from './ObjectiveAttempt';
 import { SubjectiveAttempt } from './SubjectiveAttempt';
+import { User } from './User';
+import { StudentTest } from './StudentTest';
 
 @Table
 export class Attempt extends SequelizeModel<Attempt>{
@@ -28,6 +30,9 @@ export class Attempt extends SequelizeModel<Attempt>{
     @ForeignKey(() => Test)
     testId!: number
 
+    @ForeignKey(() => StudentTest)
+    studentTestId!: number
+
     @AllowNull(false)
     @Default(DataTypes.NOW)
     @Column(DataTypes.DATE)
@@ -38,16 +43,26 @@ export class Attempt extends SequelizeModel<Attempt>{
     @Column(DataTypes.DATE)
     updatedAt!: Date
 
+    @AllowNull(true)
+    @Column(DataTypes.DATE)
+    submittedAt!: Date
+
     @BelongsTo(() => Student)
     student!: Student
 
     @BelongsTo(() => Test)
     test!: Test
 
+    @BelongsTo(() => StudentTest)
+    studentTest!: StudentTest
+
     @HasMany(() => ObjectiveAttempt)
     objectiveAttempt?: ObjectiveAttempt[]
 
     @HasMany(() => SubjectiveAttempt)
     subjectiveAttempt?: SubjectiveAttempt[]
+
+    // @HasOne(() => Student)
+    // student?: Student
 
 }
