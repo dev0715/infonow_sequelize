@@ -7,6 +7,7 @@ export type NewMessageSchemaType = {
 	chatId: number;
 	createdBy: number;
 	content: string;
+	documentId?: number;
 };
 
 export type UpdateMessageSchemaType = {
