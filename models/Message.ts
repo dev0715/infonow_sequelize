@@ -6,12 +6,14 @@ import {
 	Column,
 	Default,
 	ForeignKey,
+	HasOne,
 	Index,
 	PrimaryKey,
 	Table,
 } from "sequelize-typescript";
 import { SequelizeModel } from "../types/SequelizeModel";
 import { Chat } from "./Chat";
+import { Document } from "./Document";
 import { User } from "./User";
 
 @Table
@@ -36,6 +38,11 @@ export class Message extends SequelizeModel<Message> {
 	@Column(DataTypes.TEXT)
 	content!: string;
 
+	@ForeignKey(() => Document)
+	@AllowNull(true)
+	@Column(DataTypes.INTEGER.UNSIGNED)
+	documentId!: number;
+
 	@AllowNull(false)
 	@Default(DataTypes.NOW)
 	@Column(DataTypes.DATE)
@@ -51,4 +58,7 @@ export class Message extends SequelizeModel<Message> {
 
 	@BelongsTo(() => Chat)
 	chat!: Chat;
+
+	@BelongsTo(() => Document)
+	document!: Document;
 }

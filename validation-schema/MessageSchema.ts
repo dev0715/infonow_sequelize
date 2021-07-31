@@ -7,6 +7,7 @@ export type NewMessageSchemaType = {
 	chatId: number;
 	createdBy: number;
 	content: string;
+	documentId?: number;
 };
 
 export type UpdateMessageSchemaType = {
@@ -22,6 +23,10 @@ export const NewMessageSchema = JoiType({
 	createdBy: Joi.number()
 		.required()
 		.error(new ValidationError("%s is required", "userId")),
+
+	documentId: Joi.number().error(
+		new ValidationError("%s is required", "documentId")
+	),
 
 	content: Joi.string()
 		.min(1)

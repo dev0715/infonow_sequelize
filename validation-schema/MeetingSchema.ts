@@ -15,6 +15,7 @@ export type updateMeetingSchemaType = {
 	scheduledAt: string;
 	status: string;
 	message: string;
+	userId: string;
 };
 
 export const NewMeetingSchema = JoiType({
@@ -57,27 +58,6 @@ export const AcceptOrRejectMeetingSchema = JoiType({
 		.error(new ValidationError("%s is required", "status")),
 
 	message: Joi.string().min(0).max(200),
-});
-
-export const CancelMeetingSchema = JoiType({
-	meetingId: Joi.string()
-		.uuid()
-		.required()
-		.error(new ValidationError("%s is required", "meetingId")),
-
-	status: Joi.string()
-		.valid(...["cancelled"])
-		.error(new ValidationError("%s is required", "status")),
-
-	scheduledAt: Joi.date().error(
-		new ValidationError("%s is required", "scheduledAt")
-	),
-
-	message: Joi.string()
-		.min(0)
-		.max(200)
-		.required()
-		.error(new ValidationError("%s is required", "message")),
 });
 
 export const RescheduleMeetingSchema = JoiType({
