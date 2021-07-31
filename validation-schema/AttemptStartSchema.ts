@@ -7,9 +7,9 @@ export const AttemptStartSchema = Joi.object({
         .required()
         .error(new ValidationError("studentId is required")),
 
-    testId: Joi.string().uuid()
+    studentTestId: Joi.string().uuid()
         .required()
-        .error(new ValidationError("testId is required")),
+        .error(new ValidationError("studentTestId is required")),
 
 })
 

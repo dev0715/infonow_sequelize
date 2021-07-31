@@ -11,5 +11,13 @@ export const AssignTestSchema = Joi.object({
         .required()
         .error(new ValidationError("testId is required")),
 
+    startTime: Joi.string()
+        .required()
+        .error(new ValidationError("test start time is required")),
+
+    endTime: Joi.string()
+        .required()
+        .error(new ValidationError("test end time is required")),
+
 })
 

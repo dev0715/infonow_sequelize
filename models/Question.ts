@@ -38,7 +38,6 @@ export class Question extends SequelizeModel<Question>{
     @Column(DataTypes.INTEGER)
     marks!: number
 
-    @Index
     @AllowNull(true)
     @Column(DataTypes.STRING)
     image!: string

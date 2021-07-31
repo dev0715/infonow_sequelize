@@ -3,9 +3,9 @@ import { ValidationError } from '../utils/errors';
 
 export const AttemptUpdateSchema = Joi.object({
 
-    attemptId: Joi.number()
+    attemptId: Joi.string().uuid()
         .required()
-        .error(new ValidationError("please select a valid attempt")),
+        .error(new ValidationError("attemptId is required")),
 
     questions: Joi.array()
         .items(Joi.object({

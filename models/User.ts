@@ -53,6 +53,10 @@ export class User extends SequelizeModel<User> {
 	@Column(DataTypes.STRING(255))
 	profilePicture!: string;
 
+	@AllowNull(true)
+	@Column(DataTypes.STRING(255))
+	about!: string;
+
 	@AllowNull(false)
 	@Default(DataTypes.NOW)
 	@Column(DataTypes.DATE)
@@ -71,4 +75,6 @@ export class User extends SequelizeModel<User> {
 
 	@HasOne(() => Teacher)
 	teacher?: Teacher;
+
+
 }

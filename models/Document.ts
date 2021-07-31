@@ -34,8 +34,26 @@ export class Document extends SequelizeModel<Document>{
     fileType!: string
 
     @AllowNull(false)
+    @Column(DataTypes.BIGINT)
+    fileSize!: number
+
+    @AllowNull(false)
     @Column(DataTypes.STRING(70))
     name!: string
+
+    @Index
+    @AllowNull(true)
+    @Column(DataTypes.STRING(36))
+    Id?: string
+
+    @Index
+    @AllowNull(true)
+    @Column(DataTypes.STRING(36))
+    tag?: string
+
+    @AllowNull(true)
+    @Column(DataTypes.STRING(100))
+    fileName?: string
 
     @AllowNull(false)
     @Default(DataTypes.NOW)
@@ -52,3 +70,6 @@ export class Document extends SequelizeModel<Document>{
     user!: User
 
 }
+
+
+
