@@ -26,7 +26,7 @@ export class Option extends SequelizeModel<Option>{
     @AllowNull(false)
     @Default(0)
     @Column(DataTypes.INTEGER)
-    isRight!: number
+    isRight?: number
 
     @ForeignKey(() => Question)
     questionId!: number

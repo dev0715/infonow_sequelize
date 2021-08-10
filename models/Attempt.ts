@@ -62,7 +62,5 @@ export class Attempt extends SequelizeModel<Attempt>{
     @HasMany(() => SubjectiveAttempt)
     subjectiveAttempt?: SubjectiveAttempt[]
 
-    // @HasOne(() => Student)
-    // student?: Student
 
 }

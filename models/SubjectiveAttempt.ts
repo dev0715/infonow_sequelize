@@ -23,7 +23,7 @@ export class SubjectiveAttempt extends SequelizeModel<SubjectiveAttempt>{
     obtainedMarks!: number
 
     @AllowNull(false)
-    @Column(DataTypes.STRING)
+    @Column(DataTypes.TEXT)
     answerText!: string
 
 

@@ -43,3 +43,10 @@ export const RoleTypeRegex = `${RoleTypeEnum.join("|")}`;
 
 export type UserSearchType = "email" | "_userId" | "userId";
 export type ChatSearchType = "_chatId" | "chatId";
+
+
+export const AssignmentTypeEnum = <const>[
+	"coding",
+	"theoretical"
+];
+export type AssignmentType = typeof AssignmentTypeEnum[number];

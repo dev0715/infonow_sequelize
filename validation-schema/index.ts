@@ -12,3 +12,4 @@ export * from "./AttemptUpdateSchema";
 export * from "./SubjectiveAttemptSchema";
 export * from "./AssigntTeacherSchema";
 export * from "./AssignTestSchema";
+export * from "./AssignmentSchema";

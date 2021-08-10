@@ -24,3 +24,6 @@ export * from "./models/Attempt";
 export * from "./models/ObjectiveAttempt";
 export * from "./models/SubjectiveAttempt";
 export * from "./models/StudentTest";
+export * from "./models/Assignment";
+export * from "./models/StudentAssignment";
+export * from "./models/AssignmentAttempt";

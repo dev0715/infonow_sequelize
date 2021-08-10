@@ -1,5 +1,5 @@
 import { DataTypes } from 'sequelize';
-import { AllowNull, BelongsTo, BelongsToMany, Column, Default, ForeignKey, HasMany, Index, Model, PrimaryKey, Table, Unique } from 'sequelize-typescript';
+import { AllowNull, BelongsTo, Column, Default, ForeignKey, HasMany, Index, Model, PrimaryKey, Table, Unique } from 'sequelize-typescript';
 import { SequelizeModel } from '../types/SequelizeModel';
 import { Student } from './Student';
 import { Teacher } from './Teacher';

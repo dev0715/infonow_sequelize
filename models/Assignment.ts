@@ -1,40 +1,46 @@
 import { DataTypes } from 'sequelize';
 import { SequelizeModel } from '../types/SequelizeModel'
-import { AllowNull, AutoIncrement, BelongsTo, Column, Default, ForeignKey, HasMany, Index, Model, PrimaryKey, Table, Unique } from 'sequelize-typescript';
+import { AllowNull, AutoIncrement, BelongsTo, Column, Default, ForeignKey, Index, PrimaryKey, Table, Unique } from 'sequelize-typescript';
 import { Teacher } from './Teacher';
-import { Question } from './Question';
+import { AssignmentType, AssignmentTypeEnum } from '../types';
 
 @Table
-export class Test extends SequelizeModel<Test>{
+export class Assignment extends SequelizeModel<Assignment>{
 
     @Index
     @PrimaryKey
     @AutoIncrement
     @Column(DataTypes.INTEGER.UNSIGNED)
-    _testId!: number
+    _assignmentId!: number
 
     @Index
     @AllowNull(false)
     @Unique(true)
     @Default(DataTypes.UUIDV4)
     @Column(DataTypes.STRING(36))
-    testId!: string
+    assignmentId!: string
+
+    @ForeignKey(() => Teacher)
+    teacherId!: number
 
 
     @AllowNull(false)
     @Column(DataTypes.STRING(60))
     title!: string
 
+
     @AllowNull(false)
     @Column(DataTypes.INTEGER)
     totalMarks!: number
 
     @AllowNull(false)
-    @Column(DataTypes.INTEGER)
-    timeLimit!: number
+    @Column(DataTypes.ENUM(...AssignmentTypeEnum))
+    type!: AssignmentType
 
-    @ForeignKey(() => Teacher)
-    teacherId!: number
+    @AllowNull(false)
+    @Column(DataTypes.TEXT)
+    content!: string
+
 
     @AllowNull(false)
     @Default(DataTypes.NOW)
@@ -48,7 +54,4 @@ export class Test extends SequelizeModel<Test>{
 
     @BelongsTo(() => Teacher)
     teacher!: Teacher
-
-    @HasMany(() => Question)
-    questions?: Question[]
 }
