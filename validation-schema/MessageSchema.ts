@@ -24,6 +24,10 @@ export const NewMessageSchema = JoiType({
 		.required()
 		.error(new ValidationError("%s is required", "userId")),
 
+	documentId: Joi.number().error(
+		new ValidationError("%s is required", "documentId")
+	),
+
 	content: Joi.string()
 		.min(1)
 		.max(10000)

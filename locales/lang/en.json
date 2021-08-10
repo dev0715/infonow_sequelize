@@ -38,10 +38,6 @@
     "New Message data is not complete":"New Message data is not complete",
     "Failed to add participants, try again": "Failed to add participants, try again",
     "Invalid Participant": "Invalid Participant",
-    "Duplicate participant not allowed": "Duplicate participant not allowed",
-    "Add Participants data is not complete": "Add Participants data is not complete",
-    "chat not joined": "chat not joined",
-    "chatId is required on Join Room": "chatId is required on Join Room",
-    "New Message data is not complete": "New Message data is not complete",
-    "Invalid student selected": "Invalid student selected"
+    "Invalid student selected": "Invalid student selected",
+    "User is Blocked":"User is Blocked"
 }
