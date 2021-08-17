@@ -45,7 +45,7 @@ export class User extends SequelizeModel<User> {
 	@Column(DataTypes.STRING(255))
 	email!: string;
 
-	@AllowNull(false)
+	@AllowNull(true)
 	@Column(DataTypes.STRING(255))
 	password?: string;
 
@@ -75,6 +75,4 @@ export class User extends SequelizeModel<User> {
 
 	@HasOne(() => Teacher)
 	teacher?: Teacher;
-
-
 }
