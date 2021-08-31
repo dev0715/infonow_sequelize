@@ -8,6 +8,7 @@ export const sequelize = new Sequelize({
 	...dbConfig,
 	models: [__dirname + "/models"],
 });
+
 export const op = Op;
 export * from "./models/Document";
 export * from "./models/Meeting";

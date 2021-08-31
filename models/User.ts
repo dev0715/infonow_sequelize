@@ -57,6 +57,26 @@ export class User extends SequelizeModel<User> {
 	@Column(DataTypes.STRING(255))
 	about!: string;
 
+	@AllowNull(true)
+	@Column(DataTypes.STRING(20))
+	contactNo!: string;
+
+	@AllowNull(true)
+	@Column(DataTypes.STRING(255))
+	gitLink!: string;
+
+	@AllowNull(true)
+	@Column(DataTypes.STRING(255))
+	twitterLink!: string;
+
+	@AllowNull(true)
+	@Column(DataTypes.STRING(255))
+	fbLink!: string;
+
+	@AllowNull(true)
+	@Column(DataTypes.STRING(255))
+	linkedInLink!: string;
+
 	@AllowNull(false)
 	@Default(DataTypes.NOW)
 	@Column(DataTypes.DATE)

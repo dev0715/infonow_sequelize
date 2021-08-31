@@ -90,6 +90,19 @@ export class SequelizeModel<T> extends Model<T> {
 	}
 
 	/**
+	 * Search all instance count. Returns the first instance found, or null if none can be found.
+	 * * __SequelizeAttributes.WithIndexes__ will return all attributes
+	 * * __SequelizeAttributes.WithoutIndexes__ will return all attributes except the primary keys and foreignkeys
+	 */
+	 static async findAndCountAllSafe<T>(
+		attributeTypes: SequelizeAttributes = SequelizeAttributes.WithIndexes,
+		options?: FindOptions
+	): Promise<T> {
+		let filteredOptions = this.getAttributesDeep(attributeTypes, options);
+		return this.findAndCountAll(filteredOptions) as any;
+	}
+
+	/**
 	 * Search for a single instance. Returns the first instance found, or null if none can be found.
 	 * * __SequelizeAttributes.WithIndexes__ will return all attributes
 	 * * __SequelizeAttributes.WithoutIndexes__ will return all attributes except the primary keys and foreignkeys

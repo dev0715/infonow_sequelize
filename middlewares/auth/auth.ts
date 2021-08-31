@@ -181,14 +181,14 @@ export class AuthorizeUtil {
 			const ERR_MSG = "Cannot Authorize the user at the moment.";
 
 			// Authorize user from Token
-			req.CurrentUser = await AuthorizeUtil.AuthorizeCore(req);
-
-			// If User is not a mover, not allow
+			req.CurrentUser = await AuthorizeUtil.AuthorizeCore(req)
+			
+			// If User is not a Admin, not allow
 			if (!_.has(req, "CurrentUser.roleId"))
 				throw new UnAuthorizedError(
 					`${ERR_MSG} code:${AuthorizeUtil.ERR_CODES1.USER_TYPE_NOT_SPECIFIED}`
 				);
-			if (req.CurrentUser.roleId != "admin")
+			if (req.CurrentUser.roleId != "admin" &&  req.CurrentUser.roleId != "super-admin")
 				throw new UnAuthorizedError(
 					`${ERR_MSG} code:${AuthorizeUtil.ERR_CODES1.USER_TYPE_NOT_ADMIN}`
 				);
@@ -218,7 +218,7 @@ export class AuthorizeUtil {
 			// Authorize user from Token
 			req.CurrentUser = await AuthorizeUtil.AuthorizeCore(req);
 
-			// If User is not a mover, not allow
+			// If User is not a super admin, not allow
 			if (!_.has(req, "CurrentUser.roleId"))
 				throw new UnAuthorizedError(
 					`${ERR_MSG} code:${AuthorizeUtil.ERR_CODES1.USER_TYPE_NOT_SPECIFIED}`
@@ -236,35 +236,6 @@ export class AuthorizeUtil {
 		}
 	}
 
-	static AuthorizeAccessIfAdminOrSuperAdminOnly(
-		req: Request,
-		res: Response,
-		next: NextFunction
-	) {
-		try {
-			const ERR_MSG = "Cannot Authorize the user at the moment.";
-			if (!req.CurrentUser) {
-				throw new UnAuthorizedError(tGeneric.NOT_AUTHORIZED);
-			}
-
-			let { userId } = req.params;
-
-			if (userId) {
-				if (
-					userId != req.CurrentUser.userId &&
-					req.CurrentUser.roleId !== "admin" &&
-					req.CurrentUser.roleId !== "super-admin"
-				) {
-					throw new UnAuthorizedError(tGeneric.NOT_AUTHORIZED);
-				}
-			}
-			// - Proceed to the next route only on successful authorization
-			if (next) next();
-		} catch (err) {
-			//! Throw Error to Error Controller
-			CoreHttpErrorHandler(err, req, res, next);
-		}
-	}
 
 	static AuthorizeUserSession(
 		req: Request,

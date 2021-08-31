@@ -13,3 +13,4 @@ export * from "./SubjectiveAttemptSchema";
 export * from "./AssigntTeacherSchema";
 export * from "./AssignTestSchema";
 export * from "./AssignmentSchema";
+export * from "./UserPasswordSchema";
