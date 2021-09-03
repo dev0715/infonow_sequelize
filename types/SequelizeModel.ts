@@ -7,6 +7,7 @@ import {
 	Includeable,
 	ModelAttributeColumnOptions,
 	ModelStatic,
+	FindAndCountOptions,
 } from "sequelize/types";
 import { SequelizeAttributes } from "./SequelizeAttributes";
 
@@ -96,7 +97,7 @@ export class SequelizeModel<T> extends Model<T> {
 	 */
 	 static async findAndCountAllSafe<T>(
 		attributeTypes: SequelizeAttributes = SequelizeAttributes.WithIndexes,
-		options?: FindOptions
+		options?: FindAndCountOptions
 	): Promise<T> {
 		let filteredOptions = this.getAttributesDeep(attributeTypes, options);
 		return this.findAndCountAll(filteredOptions) as any;

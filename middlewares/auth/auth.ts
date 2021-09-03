@@ -266,4 +266,34 @@ export class AuthorizeUtil {
 		if ((req.CurrentUser as any)![sessionKey] !== userId)
 			throw new BadRequestError(ERR_MSG);
 	}
+
+	static AuthorizeAdminOrSelf(
+		req: Request,
+		res: Response,
+		next: NextFunction
+	) {
+		try {
+			const ERR_MSG = "Cannot Authorize the user at the moment.";
+			if (!req.CurrentUser) {
+				throw new UnAuthorizedError(tGeneric.NOT_AUTHORIZED);
+			}
+
+			let { userId } = req.params;
+
+			if (userId) {
+				if (
+					userId != req.CurrentUser.userId &&
+					req.CurrentUser.roleId !== "admin" &&
+					req.CurrentUser.roleId !== "super-admin"
+				) {
+					throw new UnAuthorizedError(tGeneric.NOT_AUTHORIZED);
+				}
+			}
+			// - Proceed to the next route only on successful authorization
+			if (next) next();
+		} catch (err) {
+			//! Throw Error to Error Controller
+			CoreHttpErrorHandler(err, req, res, next);
+		}
+	}
 }
