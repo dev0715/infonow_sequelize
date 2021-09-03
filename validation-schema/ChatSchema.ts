@@ -50,8 +50,15 @@ export const NewChatSchema = JoiType({
 		.required()
 		.error(new ValidationError("%s is required", "userId")),
 
-	role: Joi.string()
-		.pattern(/^teacher$/)
-		.required()
-		.error(new ValidationError("You are not authorized to this operation")),
+	role: Joi.when("type", {
+		is: "group",
+		then: Joi.string()
+			.pattern(/^teacher$/)
+			.error(
+				new ValidationError("You are not authorized to this operation")
+			),
+		otherwise: Joi.string()
+			.pattern(/^student|teacher$/)
+			.error(new ValidationError("%s is required", "role")),
+	}),
 });

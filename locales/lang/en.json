@@ -39,5 +39,7 @@
     "Failed to add participants, try again": "Failed to add participants, try again",
     "Invalid Participant": "Invalid Participant",
     "Invalid student selected": "Invalid student selected",
-    "User is Blocked":"User is Blocked"
+    "User is Blocked":"User is Blocked",
+    "No admin available for meeting":"No admin available for meeting",
+    "One meeting is already scheduled": "One meeting is already scheduled"
 }
