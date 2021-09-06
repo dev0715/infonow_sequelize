@@ -47,7 +47,7 @@ export class Meeting extends SequelizeModel<Meeting> {
 	scheduledAt!: Date;
 
 	@AllowNull(true)
-	@Default("pending")
+	@Default(null)
 	@Column(DataTypes.STRING)
 	message?: string;
 
