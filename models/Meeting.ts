@@ -14,6 +14,7 @@ import {
 } from "sequelize-typescript";
 import { MeetingStatus, MeetingStatusEnum } from "../types";
 import { SequelizeModel } from "../types/SequelizeModel";
+import { MeetingFeedback } from "./MeetingFeedback";
 import { Participant } from "./Participant";
 import { User } from "./User";
 @Table
@@ -70,4 +71,7 @@ export class Meeting extends SequelizeModel<Meeting> {
 
 	@HasMany(() => Participant)
 	participants!: Participant[];
+
+	@HasMany(() => MeetingFeedback)
+	feedbacks!: MeetingFeedback[];
 }

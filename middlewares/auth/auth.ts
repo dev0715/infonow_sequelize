@@ -181,14 +181,17 @@ export class AuthorizeUtil {
 			const ERR_MSG = "Cannot Authorize the user at the moment.";
 
 			// Authorize user from Token
-			req.CurrentUser = await AuthorizeUtil.AuthorizeCore(req)
-			
+			req.CurrentUser = await AuthorizeUtil.AuthorizeCore(req);
+
 			// If User is not a Admin, not allow
 			if (!_.has(req, "CurrentUser.roleId"))
 				throw new UnAuthorizedError(
 					`${ERR_MSG} code:${AuthorizeUtil.ERR_CODES1.USER_TYPE_NOT_SPECIFIED}`
 				);
-			if (req.CurrentUser.roleId != "admin" &&  req.CurrentUser.roleId != "super-admin")
+			if (
+				req.CurrentUser.roleId != "admin" &&
+				req.CurrentUser.roleId != "super-admin"
+			)
 				throw new UnAuthorizedError(
 					`${ERR_MSG} code:${AuthorizeUtil.ERR_CODES1.USER_TYPE_NOT_ADMIN}`
 				);
@@ -235,7 +238,6 @@ export class AuthorizeUtil {
 			CoreHttpErrorHandler(err, req, res, next);
 		}
 	}
-
 
 	static AuthorizeUserSession(
 		req: Request,
