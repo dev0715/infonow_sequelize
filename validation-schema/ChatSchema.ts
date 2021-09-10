@@ -28,7 +28,7 @@ export const NewChatSchema = JoiType({
 		.error(new ValidationError("%s is required", "groupPhoto"))
 		.when("type", {
 			is: "group",
-			then: Joi.string().required(),
+			then: Joi.string().optional(),
 		}),
 
 	participants: Joi.array()

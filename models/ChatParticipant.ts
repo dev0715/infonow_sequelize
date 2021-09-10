@@ -48,4 +48,8 @@ export class ChatParticipant extends SequelizeModel<ChatParticipant> {
 	@AllowNull(true)
 	@Column(DataTypes.DATE)
 	blockedAt!: Date;
+
+	@Default(1)
+	@Column(DataTypes.TINYINT)
+	chatParticipantStatus!: boolean;
 }

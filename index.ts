@@ -1,7 +1,7 @@
 import { Sequelize } from "sequelize-typescript";
 import GlobalConfigs from "./configs";
 const dbConfig = GlobalConfigs!.DatabaseConfigurations;
-import { Op } from 'sequelize'
+import { Op } from "sequelize";
 
 export const sequelize = new Sequelize({
 	dialect: "mysql",

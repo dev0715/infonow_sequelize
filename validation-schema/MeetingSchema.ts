@@ -48,9 +48,8 @@ export const NewMeetingSchema = JoiType({
 		.error(new ValidationError("%s is required", "agenda")),
 
 	message: Joi.string()
-		.min(0)
 		.max(200)
-		.required()
+		.optional()
 		.error(new ValidationError("%s is required", "message")),
 });
 
@@ -74,9 +73,8 @@ export const NewAdminMeetingSchema = JoiType({
 		.error(new ValidationError("%s is required", "agenda")),
 
 	message: Joi.string()
-		.min(0)
 		.max(200)
-		.required()
+		.optional()
 		.error(new ValidationError("%s is required", "message")),
 });
 
@@ -91,7 +89,7 @@ export const AcceptOrRejectMeetingSchema = JoiType({
 		.required()
 		.error(new ValidationError("%s is required", "status")),
 
-	message: Joi.string().min(0).max(200),
+	message: Joi.string().max(200).optional(),
 });
 
 export const RescheduleMeetingSchema = JoiType({
@@ -109,8 +107,7 @@ export const RescheduleMeetingSchema = JoiType({
 		.error(new ValidationError("%s is required", "scheduledAt")),
 
 	message: Joi.string()
-		.min(0)
 		.max(200)
-		.required()
+		.optional()
 		.error(new ValidationError("%s is required", "message")),
 });
