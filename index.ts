@@ -6,6 +6,7 @@ import { Op } from 'sequelize'
 export const sequelize = new Sequelize({
 	dialect: "mysql",
 	...dbConfig,
+	set:{sql_mode:''},
 	models: [__dirname + "/models"],
 });
 
@@ -28,3 +29,4 @@ export * from "./models/StudentTest";
 export * from "./models/Assignment";
 export * from "./models/StudentAssignment";
 export * from "./models/AssignmentAttempt";
+export * from "./models/Ebook";
