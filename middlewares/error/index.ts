@@ -219,7 +219,7 @@ export function CoreHttpErrorHandler(
 				res
 			);
 		}
-	} catch (exception:any) {
+	} catch (exception) {
 		const statusCode = exception.statusCode ?? 500;
 		const message = `Something went wrong. ER_${statusCode}_0`;
 		Logger.error(ErrorTag("UNKNOWN_ERROR"), exception);

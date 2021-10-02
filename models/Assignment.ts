@@ -1,8 +1,8 @@
 import { DataTypes } from 'sequelize';
 import { SequelizeModel } from '../types/SequelizeModel'
 import { AllowNull, AutoIncrement, BelongsTo, Column, Default, ForeignKey, Index, PrimaryKey, Table, Unique } from 'sequelize-typescript';
-import { Teacher } from './Teacher';
 import { AssignmentType, AssignmentTypeEnum } from '../types';
+import { Teacher } from './Teacher';
 
 @Table
 export class Assignment extends SequelizeModel<Assignment>{
@@ -22,6 +22,7 @@ export class Assignment extends SequelizeModel<Assignment>{
 
     @ForeignKey(() => Teacher)
     teacherId!: number
+
 
 
     @AllowNull(false)
