@@ -30,3 +30,5 @@ export * from "./models/Assignment";
 export * from "./models/StudentAssignment";
 export * from "./models/AssignmentAttempt";
 export * from "./models/Ebook";
+export * from "./models/PaymentPlan";
+export * from "./models/UserPayment";
