@@ -11,14 +11,17 @@ export class Assignment extends SequelizeModel<Assignment>{
     @PrimaryKey
     @AutoIncrement
     @Column(DataTypes.INTEGER.UNSIGNED)
-    _businessId!: number
+    _assignmentId!: number
 
     @Index
     @AllowNull(false)
     @Unique(true)
     @Default(DataTypes.UUIDV4)
     @Column(DataTypes.STRING(36))
-    businessId!: string
+    assignmentId!: string
+
+    @ForeignKey(() => Teacher)
+    teacherId!: number
 
 
 
