@@ -5,7 +5,7 @@ import { ValidationError } from '../utils/errors';
 export const TestSchema = Joi.object({
 
     title: Joi.string()
-        .min(10)
+        .min(3)
         .max(60)
         .required()
         .error(new ValidationError("Title must be between 3-60 characters and only contain alphabets")),

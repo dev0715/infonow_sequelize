@@ -11,7 +11,7 @@ import { Logger } from "../../utils/logger";
 import _ from "lodash";
 import { JsonWebTokenError } from "jsonwebtoken";
 
-interface FataError {
+interface FatalError {
 	identifier: string;
 	error: ApplicationError | DatabaseError | Error | any;
 }
@@ -91,7 +91,7 @@ function HandleUserFacingError(
 }
 
 function CanHandleKnownFatalErrors(
-	err: FataError,
+	err: FatalError,
 	res: Response
 ): false | Object {
 	const message = err.error.message ?? "UNKNOWN_ERROR";
@@ -113,7 +113,7 @@ function CanHandleKnownFatalErrors(
 	return false;
 }
 
-function HandleFatalErrors(err: FataError, res: Response) {
+function HandleFatalErrors(err: FatalError, res: Response) {
 	const statusCode = err.error.statusCode ?? 500;
 
 	const canHandlKnownFatalErrors = CanHandleKnownFatalErrors(err, res);
