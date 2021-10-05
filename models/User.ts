@@ -77,6 +77,22 @@ export class User extends SequelizeModel<User> {
 	@Column(DataTypes.STRING(255))
 	linkedInLink!: string;
 
+	@AllowNull(true)
+	@Column(DataTypes.STRING(255))
+	address?: string;
+	
+	@AllowNull(true)
+	@Column(DataTypes.STRING(255))
+	city?: string;
+
+	@AllowNull(true)
+	@Column(DataTypes.STRING(255))
+	county?: string;
+
+	@AllowNull(true)
+	@Column(DataTypes.STRING(255))
+	country?: string;
+
 	@AllowNull(false)
 	@Default(DataTypes.NOW)
 	@Column(DataTypes.DATE)
