@@ -14,9 +14,8 @@ export const UserAddSchema = Joi.object({
         .error(new ValidationError("role is required")),
 
     name: Joi.string()
-        .pattern(new RegExp('^[a-zA-Z\s]{3,100}$'))
         .required()
-        .error(new ValidationError("Name must be between 3-100 characters and only contain alphabets")),
+        .error(new ValidationError("Please provide a name")),
 
     email: Joi.string()
         .email()
