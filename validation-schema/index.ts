@@ -16,3 +16,4 @@ export * from "./AssignmentSchema";
 export * from "./UserPasswordSchema";
 export * from "./MeetingFeedbackSchema";
 export * from "./PaymentPlanSchema";
+export * from "./NewTicketSchema";
