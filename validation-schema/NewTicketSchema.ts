@@ -12,13 +12,13 @@ export type NewTicketSchemaType = {
 
 export const NewTicketSchema = JoiType({
 	subject: Joi.string().error(
-		new ValidationError("%s is required", "subject")
+		new ValidationError("Subject is required")
 	),
 
 	message: Joi.string()
 		.min(10)
 		.max(1000)
 		.required()
-		.error(new ValidationError("%s is required", "message")),
+		.error(new ValidationError("Message is required")),
 });
 
