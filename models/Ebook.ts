@@ -40,6 +40,12 @@ export class Ebook extends SequelizeModel<Ebook>{
     @Column(DataTypes.TEXT)
     bookUrl?: string
 
+    @Column(DataTypes.INTEGER.UNSIGNED)
+    priceInCents!: number
+
+    @Column(DataTypes.DECIMAL(10,2).UNSIGNED)
+    price!: number
+
     @AllowNull(false)
     @Default(DataTypes.NOW)
     @Column(DataTypes.DATE)
