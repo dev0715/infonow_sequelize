@@ -17,7 +17,7 @@ interface FatalError {
 }
 
 export class MissingParam {
-	constructor(public name: string, public friendlyName: string) {}
+	constructor(public name: string, public friendlyName: string) { }
 }
 
 export class MissingParams {
@@ -137,9 +137,8 @@ export function MissingParamsErrorHandler(
 	missingParams: string[] | MissingParams,
 	entity = ""
 ) {
-	let errorMsg = `The following are missing/invalid${
-		entity == "" ? ": " : ` from ${entity}`
-	}: `;
+	let errorMsg = `The following are missing/invalid${entity == "" ? ": " : ` from ${entity}`
+		}: `;
 
 	if (missingParams instanceof MissingParams) {
 		errorMsg += missingParams.getReadableString();
@@ -219,7 +218,7 @@ export function CoreHttpErrorHandler(
 				res
 			);
 		}
-	} catch (exception) {
+	} catch (exception: any) {
 		const statusCode = exception.statusCode ?? 500;
 		const message = `Something went wrong. ER_${statusCode}_0`;
 		Logger.error(ErrorTag("UNKNOWN_ERROR"), exception);

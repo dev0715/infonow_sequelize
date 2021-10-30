@@ -24,7 +24,7 @@ export class EbookPurchase extends SequelizeModel<EbookPurchase>{
     userId!: number
 
     @ForeignKey(() => Ebook)
-    bookId!: number
+    ebookId!: number
 
     @AllowNull(false)
     @Default(DataTypes.NOW)
