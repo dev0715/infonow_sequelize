@@ -59,6 +59,10 @@ export class User extends SequelizeModel<User> {
 
 	@AllowNull(true)
 	@Column(DataTypes.STRING(20))
+	zipCode!: string;
+
+	@AllowNull(true)
+	@Column(DataTypes.STRING(20))
 	contactNo!: string;
 
 	@AllowNull(true)
