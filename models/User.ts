@@ -57,6 +57,11 @@ export class User extends SequelizeModel<User> {
 	@Column(DataTypes.STRING(255))
 	about!: string;
 
+	@AllowNull(false)
+	@Default(104857600)
+	@Column(DataTypes.INTEGER)
+	storage!: number;
+
 	@AllowNull(true)
 	@Column(DataTypes.STRING(20))
 	zipCode!: string;
