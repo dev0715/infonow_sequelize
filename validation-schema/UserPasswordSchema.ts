@@ -12,4 +12,8 @@ export const UserPasswordSchema = Joi.object({
 
     confirmPassword: Joi.ref('password'),
 
+    token: Joi
+    .string()
+    .optional()
+
 }).with('password', 'confirmPassword');
